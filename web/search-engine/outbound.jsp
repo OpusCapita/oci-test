@@ -26,14 +26,14 @@
    </script>
   </head>
   <body>
-  	<jsp:scriptlet>
+    <jsp:scriptlet>
 
       String url = "";
 
       try {
 
         PropertyResourceBundle propertyBoundle =
-          new PropertyResourceBundle(this.getServletConfig().getServletContext().getResourceAsStream("project.properties"));
+          new PropertyResourceBundle(this.getServletConfig().getServletContext().getResourceAsStream("WEB-INF/conf/system.properties"));
 
           if (!propertyBoundle.getString("search.engine.url").equals("")) url = propertyBoundle.getString("search.engine.url");
         }
