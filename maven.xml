@@ -1,4 +1,8 @@
-<project default="jcatalog:build">
+<project default="war:war">
+
+  <goal name="jcatalog:nightly-build">
+    <!-- do nothing -->
+  </goal>
   
   <!-- Post goals -->
   <postGoal name="jcatalog:config-environment">
