@@ -15,12 +15,12 @@
       </style>
       <script language="javascript">
         function back(){
-          window.location="<c:url value="/showInputPage.do"/>";
+          window.location="<c:url value="/editPunchoutSchema.do"/>";
         }
       </script>
     </head>
     <body>
-      <html:form action="/addOciProperty.do" method="post">
+      <html:form action="/addPunchoutProperty.do" method="post">
         <fieldset>
           <legend>
               Input new property parameters
@@ -32,9 +32,9 @@
           <html:text property="value" size="40"/><br/>
 
           <label>&amp;nbsp;</label>
-          <input type="button" value="back" onClick="back()"/>
-           <![CDATA[&nbsp]]>
           <input type="submit" value="add property"/>
+          <![CDATA[&nbsp]]>
+          <input type="button" value="back" onClick="back()"/>
         </fieldset>
       </html:form>
     </body>

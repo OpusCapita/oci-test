@@ -16,9 +16,10 @@
     </head>
 
     <body>
+      <html:link action="applicationIndex.do" target="_parent">Back to main page</html:link>
       <ul>Search-Engine OCI test
         <c:forEach items="${actions}" var="action">
-          <li><html:link action="/showProperties.do?function=${action}"><c:out value="${action}"/></html:link></li>
+          <li><html:link action="/showOciParameters.do?function=${action}"><c:out value="${action}"/></html:link></li>
         </c:forEach>
       </ul>
     </body>

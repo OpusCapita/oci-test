@@ -15,9 +15,9 @@ import java.util.*;
 
 public class Properties extends LinkedHashMap {
     private static final long serialVersionUID = 4112578634029874840L;
-    private static final String keyValueSeparators = "=: \t\r\n\f";
-    private static final String strictKeyValueSeparators = "=:";
-    private static final String specialSaveChars = "=: \t\r\n\f#!";
+    private static final String keyValueSeparators = "= \t\r\n\f";
+    private static final String strictKeyValueSeparators = "=";
+    private static final String specialSaveChars = "= \t\r\n\f#!";
     private static final String whiteSpaceChars = " \t\r\n\f";
 
     /** A table of hex digits */

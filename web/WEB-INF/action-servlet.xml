@@ -5,16 +5,32 @@
 
 <beans>
 
-  <bean name="/init,/initFrame" class="com.jcatalog.ocisetest.webapp.actions.InitAction">
+  <bean name="/initOciIndex,/initOciIndexFrame" class="com.jcatalog.ocisetest.webapp.actions.InitOciIndexAction">
     <property name="propertiesHolders"><ref bean="propertiesHolderFactory"/></property>
   </bean>
 
-  <bean name="/showProperties" class="com.jcatalog.ocisetest.webapp.actions.ShowAction">
+  <bean name="/initPunchoutIndex" class="com.jcatalog.ocisetest.webapp.actions.InitPunchoutIndexAction">
+    <property name="schemaHolderFactory"><ref bean="schemaHolderFactory"/></property>
+  </bean>
+
+  <bean name="/showOciParameters" class="com.jcatalog.ocisetest.webapp.actions.ShowOciParametersAction">
     <property name="propertiesHolders"><ref bean="propertiesHolderFactory"/></property>
   </bean>
 
-  <bean name="/saveConfiguration" class="com.jcatalog.ocisetest.webapp.actions.SaveAction">
+  <bean name="/saveOciConfiguration" class="com.jcatalog.ocisetest.webapp.actions.SaveOciConfigurationAction">
     <property name="propertiesHolders"><ref bean="propertiesHolderFactory"/></property>
   </bean>
+
+  <bean name="/deletePunchoutSchema,/editPunchoutSchema,/addPunchoutProperty,/savePunchoutSchema,/duplicatePunchoutSchema,
+    /deletePunchoutProperty,/setActive" class="com.jcatalog.ocisetest.webapp.actions.PunchoutSchemaManagerAction">
+    <property name="schemaHolderFactory"><ref bean="schemaHolderFactory"/></property>
+  </bean>
+
+  <bean name="/punchoutTest,/copyItem,/deleteItem,/saveItem,/showInboundData" class="com.jcatalog.ocisetest.webapp.actions.PunchoutTestAction">
+    <property name="schemaHolderFactory"><ref bean="schemaHolderFactory"/></property>
+    <property name="itemStorageManager"><ref bean="itemStorageManager"/></property>
+  </bean>
+
+
 
 </beans>

@@ -4,7 +4,7 @@ import java.io.File;
 
 
 /**
- * Interface containing methods for Properties manipulation 
+ * Interface containing methods for Properties manipulation
  *
  * @author Alexander Shulga
  */
@@ -22,8 +22,4 @@ public interface PropertiesHolder {
     public void setDefaultPropertiesFilePath(File path);
 
     public void setUserPropertiesFilePath(File path);
-
-    public void setFunction(String function);
-
-    public String getFunction();
 }

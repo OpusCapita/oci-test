@@ -28,17 +28,17 @@
         }
 
         function addProperty(){
-          document.forms[0].action = jcApplicationContextPath+'/showAddingPage.do';
+          document.forms[0].action = jcApplicationContextPath+'/showAddingPage.do?forward=oci';
           return true;
         }
 
         function save(){
-          document.forms[0].action = jcApplicationContextPath+'/saveConfiguration.do';
+          document.forms[0].action = jcApplicationContextPath+'/saveOciConfiguration.do';
           return true;
         }
 
         function back(){
-          location.href="init.do"
+          location.href="initOciIndex.do"
         }
 
       </script>

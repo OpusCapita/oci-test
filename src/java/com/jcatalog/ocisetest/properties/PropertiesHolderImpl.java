@@ -14,7 +14,6 @@ public class PropertiesHolderImpl implements PropertiesHolder {
     private File defaultPropertiesFilePath = null;
     private File userPropertiesFilePath = null;
     private Properties properties = null;
-    private String function = null;
 
     public void loadProperties() throws Exception {
         properties = new Properties();
@@ -54,13 +53,5 @@ public class PropertiesHolderImpl implements PropertiesHolder {
 
     public void setUserPropertiesFilePath(File path) {
         this.userPropertiesFilePath = path;
-    }
-
-    public String getFunction() {
-        return function;
-    }
-
-    public void setFunction(String function) {
-        this.function = function;
     }
 }

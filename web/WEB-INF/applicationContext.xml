@@ -10,6 +10,14 @@
     </property>
   </bean>
 
+  <bean name="schemaHolderFactory" class="com.jcatalog.ocisetest.schemas.SchemaHolderFactory" init-method="init">
+    <property name="baseDir">
+      <value>${ocisetest.root}/WEB-INF/conf/punchout</value>
+    </property>
+  </bean>
+
+  <bean name="itemStorageManager" class="com.jcatalog.ocisetest.schemas.ItemStorageManager"/>
+
   <bean id="sysPropsPP" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="systemPropertiesMode"><value>2</value></property>
   </bean>
