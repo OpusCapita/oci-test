@@ -26,6 +26,6 @@ public class AddOciPropertyAction extends Action {
                 .getSimpleProperty(form, "name"),
             BeanUtils.getSimpleProperty(form, "value"));
 
-        return mapping.getInputForward();
+        return mapping.findForward("success");
     }
 }
