@@ -238,7 +238,21 @@
       <version>0.1</version>
       <type>plugin</type>
     </dependency>
+
+    <dependency>
+      <groupId>jcatalog-commons</groupId>
+      <artifactId>commons</artifactId>
+      <version>5.1.2</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
   </dependencies>
+
+
+
 
   <build>
     <name>oci-se-test</name>
