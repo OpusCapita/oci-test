@@ -5,7 +5,7 @@
 
 <beans>
 
-  <bean name="/init" class="com.jcatalog.ocisetest.webapp.actions.InitAction">
+  <bean name="/init,/initFrame" class="com.jcatalog.ocisetest.webapp.actions.InitAction">
     <property name="propertiesHolders"><ref bean="propertiesHolderFactory"/></property>
   </bean>
 

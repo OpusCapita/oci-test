@@ -20,6 +20,10 @@
       <forward name="success" path="/search-engine/index.jsp"/>
     </action>
 
+    <action path="/initFrame" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/search-engine/indexFrame.jsp"/>
+    </action>
+
     <action path="/showProperties" type="org.springframework.web.struts.DelegatingActionProxy">
       <forward name="success" path="/showInputPage.do"/>
     </action>

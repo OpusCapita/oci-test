@@ -17,14 +17,13 @@
       <script language="javascript">
         var jcApplicationContextPath = '<jsp:expression>request.getContextPath()</jsp:expression>';
 
-        function prepareFormData(functionName) {
+        function run() {
           document.forms[0].action = document.forms[0].catalog_url.value;
           if (document.forms[0].targetFrame.value.length > 0) {
             document.forms[0].target = document.forms[0].targetFrame.value;
           } else {
             document.forms[0].target = "_self";
           }
-          document.forms[0].FUNCTION.value = functionName;
           return true;
         }
 
@@ -36,6 +35,10 @@
         function save(){
           document.forms[0].action = jcApplicationContextPath+'/saveConfiguration.do';
           return true;
+        }
+
+        function back(){
+          location.href="init.do"
         }
 
       </script>
@@ -76,18 +79,18 @@
             Fill the form
           </legend>
           <input type="hidden" name="cmd" value="OCILogin"/>
-          <html:hidden property="FUNCTION" value="${properties['FUNCTION']}"/>
           <c:forEach items="${properties}" var="property" varStatus="status">
             <label><c:out value="${property.key}:"/></label>
             <html:text property="${property.key}" value="${property.value}" size="40"/><br/>
           </c:forEach>
-
-          <label>&amp;nbsp;</label>
-          <html:submit value="do it" onclick="return prepareFormData('${properties['FUNCTION']}');"/>
+            <![CDATA[&nbsp]]>
+          <html:submit value="do it" onclick="return run();"/>
             <![CDATA[&nbsp]]>
           <input type="submit" value="add property" onClick="return addProperty();"/>
             <![CDATA[&nbsp]]>
           <input type="submit" value="save configuration" onClick="return save();"/>
+            <![CDATA[&nbsp]]>
+          <input type="button" value="back" onclick="back()"/>
         </fieldset>
       </form>
 
