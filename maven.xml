@@ -1,0 +1,20 @@
+<project default="jcatalog:build">
+  
+  <!-- Post goals -->
+  <postGoal name="jcatalog:config-environment">
+    <mkdir dir="${maven.build.dir}/${pom.artifactId}/WEB-INF/conf"/>
+    <mkdir dir="${maven.build.dir}/${pom.artifactId}/logs"/>
+
+    <copy todir="${maven.build.dir}/${pom.artifactId}/WEB-INF/conf">
+      <fileset dir="${maven.jcatalog.config.target.dir}">
+        <include name="log4j.properties"/>
+        <include name="system.properties"/>
+      </fileset>
+    </copy>
+  </postGoal>
+
+  <postGoal name="war:webapp">
+    <attainGoal name="jcatalog:config-environment"/>
+  </postGoal>
+
+</project>
