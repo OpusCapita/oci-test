@@ -37,6 +37,10 @@
           return true;
         }
 
+        function deleteProperty(property){
+          location.href="deleteOciProperty.do?property="+property;
+        }
+
         function back(){
           location.href="initOciIndex.do"
         }
@@ -81,7 +85,8 @@
           <input type="hidden" name="cmd" value="OCILogin"/>
           <c:forEach items="${properties}" var="property" varStatus="status">
             <label><c:out value="${property.key}:"/></label>
-            <html:text property="${property.key}" value="${property.value}" size="40"/><br/>
+            <html:text property="${property.key}" value="${property.value}" size="40"/><![CDATA[&nbsp]]>
+            <html:button property="" value="delete" onclick="deleteProperty('${property.key}')"/><br/>
           </c:forEach>
             <![CDATA[&nbsp]]>
           <html:submit value="do it" onclick="return run();"/>

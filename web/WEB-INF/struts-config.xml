@@ -39,7 +39,14 @@
 
     <action path="/addOciProperty" unknown="false" validate="false"
         name="propertyForm" scope="request"
-        type="com.jcatalog.ocisetest.webapp.actions.AddOciPropertyAction">
+        type="com.jcatalog.ocisetest.webapp.actions.OciPropertyAction"
+        parameter="addProperty">
+      <forward name="success" path="/showInputPage.do"/>
+    </action>
+
+    <action path="/deleteOciProperty"
+        type="com.jcatalog.ocisetest.webapp.actions.OciPropertyAction"
+        parameter="deleteProperty">
       <forward name="success" path="/showInputPage.do"/>
     </action>
 
