@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean name="propertiesHolderFactory" class="com.jcatalog.ocisetest.properties.PropertiesHolderFactoryBean">
+    <property name="baseDir">
+      <value>${ocisetest.root}/WEB-INF/conf/search-engine</value>
+    </property>
+  </bean>
+
+  <bean id="sysPropsPP" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesMode"><value>2</value></property>
+  </bean>
+
+</beans>

@@ -24,39 +24,236 @@
   <developers/>
 
   <!-- jar files the project is dependent on -->
-  <dependencies>
-    <!-- jCatalog dependencies -->
+    <dependencies>
+
+    <dependency>
+      <id>commons-beanutils</id>
+      <version>1.6.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-collections</id>
+      <version>2.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-lang</id>
+      <version>2.0</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-logging</id>
+      <version>1.0.3</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-digester</id>
+      <version>1.5</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>commons-configuration</id>
+      <version>20040121.140929</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
+    <!-- log4j -->
+    <dependency>
+      <id>log4j</id>
+      <version>1.2.8</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
+   <!-- ant -->
+    <dependency>
+      <id>ant</id>
+      <version>1.5.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
+    <!-- web app stuff -->
+    <dependency>
+      <id>jstl</id>
+      <version>1.0.3</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>taglibs:standard</id>
+      <version>1.0.3</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>struts</id>
+      <version>1.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>struts:struts-el</id>
+      <version>1.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>displaytag</groupId>
+      <artifactId>displaytag</artifactId>
+      <version>20040810.070400</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>servletapi</id>
+      <version>2.3</version>
+    </dependency>
+
+    <!-- jc-taglibs -->
+    <dependency>
+      <id>jc-taglibs:jc-dhtmltree</id>
+      <version>0.1.0</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>jc-taglibs:jc-modalconfirm</id>
+      <version>0.1.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>jc-taglibs:jc-tabcontrol</id>
+      <version>0.1.0</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>jc-taglibs:jc-pagenavigation</id>
+      <version>0.1.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>jc-taglibs</groupId>
+      <artifactId>jc-doc</artifactId>
+      <version>0.1.0</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>jc-taglibs</groupId>
+      <artifactId>jc-core</artifactId>
+      <version>0.1.0</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
+    <!-- spring -->
+    <dependency>
+      <groupId>springframework</groupId>
+      <artifactId>spring</artifactId>
+      <version>1.1</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>aopalliance</id>
+      <version>1.0</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
+    <!-- for build -->
+    <dependency>
+      <groupId>jcatalog-maven</groupId>
+      <artifactId>maven-doccheck-plugin</artifactId>
+      <version>0.1</version>
+      <type>plugin</type>
+    </dependency>
+
+    <dependency>
+      <groupId>jcatalog-maven</groupId>
+      <artifactId>maven-jspdoc-plugin</artifactId>
+      <version>0.1</version>
+      <type>plugin</type>
+    </dependency>
+
     <dependency>
       <groupId>jcatalog-maven</groupId>
       <artifactId>maven-jcatalog-plugin</artifactId>
-      <version>SNAPSHOT</version>
+      <version>0.2</version>
       <type>plugin</type>
     </dependency>
-    <!-- for web -->
+
     <dependency>
-      <groupId>jstl</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.1.1</version>
-      <properties>
-        <war.bundle>true</war.bundle>
-      </properties>
-    </dependency>
-    <dependency>
-      <groupId>taglibs</groupId>
-      <artifactId>standard</artifactId>
-      <version>1.1.1</version>
-      <properties>
-        <war.bundle>true</war.bundle>
-      </properties>
-    </dependency>
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.2</version>
-      <properties>
-        <war.bundle>true</war.bundle>
-      </properties>
+      <groupId>jcatalog-maven</groupId>
+      <artifactId>maven-blackbox-plugin</artifactId>
+      <version>0.1</version>
+      <type>plugin</type>
     </dependency>
   </dependencies>
+
+  <build>
+    <name>oci-se-test</name>
+    <sourceDirectory>${basedir}/src/java</sourceDirectory>
+
+    <resources>
+
+      <resource>
+        <directory>${basedir}/src/java</directory>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+
+    </resources>
+  </build>
 
 </project>

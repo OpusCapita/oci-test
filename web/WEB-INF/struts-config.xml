@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+  <form-beans>
+
+    <form-bean name="propertyForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
+      <form-property name="name" type="java.lang.String"/>
+      <form-property name="value" type="java.lang.String"/>
+    </form-bean>
+
+  </form-beans>
+
+
+  <action-mappings>
+
+    <action path="/init" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/search-engine/index.jsp"/>
+    </action>
+
+    <action path="/showProperties" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/showInputPage.do"/>
+    </action>
+
+    <action path="/showAddingPage" type="com.jcatalog.ocisetest.webapp.actions.ShowAddingPageAction">
+      <forward name="success" path="/search-engine/add.jsp"/>
+    </action>
+
+    <action path="/addProperty" unknown="false" validate="false"
+        name="propertyForm" scope="request"
+        type="com.jcatalog.ocisetest.webapp.actions.AddAction">
+      <forward name="success" path="/showInputPage.do"/>
+    </action>
+
+    <action path="/saveConfiguration" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/showInputPage.do"/>
+    </action>
+
+    <action path="/showInputPage" forward="/search-engine/input.jsp"/>
+
+  </action-mappings>
+
+  <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn"/>
+
+</struts-config>
