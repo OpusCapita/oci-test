@@ -1,0 +1,8 @@
+# copy this file to build.properties and 
+# set properties according to your local environment
+
+tomcat.home=D:/java/jakarta-tomcat-5.0.27
+
+manager.url = http://localhost:8080/manager
+manager.username = admin
+manager.password = asdzxc
