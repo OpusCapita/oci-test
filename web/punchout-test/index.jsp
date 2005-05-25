@@ -40,8 +40,9 @@
     <body>
       <html:link action="applicationIndex.do">Back to main page</html:link>
       <table>
+         <tr><td><h6>Punchout connection URI should be set to<br/>http://[hostname]:[port]/oci-test/punchoutTest.do<br/>for Punchout test using </h6></td></tr>
         <tr>
-          <td>Search-Engine Punchout test</td>
+          <td><b>Search-Engine Punchout test</b></td>
         </tr>
         <c:forEach items="${schemas}" var="schema">
           <tr>
