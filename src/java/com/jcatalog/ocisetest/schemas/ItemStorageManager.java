@@ -38,7 +38,7 @@ public class ItemStorageManager {
     public List getIndexedItems(ItemStorage itemStorage) {
         List items = itemStorage.getItems();
         List indexedItems = new ArrayList();
-        int counter = 0;
+        int counter = 1;
         for (Iterator iterator = items.iterator(); iterator.hasNext();) {
             Properties properties = (Properties) iterator.next();
             Properties indexedProperties = new Properties();
