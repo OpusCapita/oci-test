@@ -251,11 +251,7 @@
 
   </dependencies>
 
-
-
-
   <build>
-    <name>oci-se-test</name>
     <sourceDirectory>${basedir}/src/java</sourceDirectory>
 
     <resources>
