@@ -28,13 +28,17 @@ fieldset {
     border: #949ABD solid 1px;
 }
 
+td.label{
+    font-family : Verdana, Arial;
+    font-size :13px;
+    vertical-align : center;
+}
+
 label {
     width: 17em;
     float: left;
     text-align: right;
     margin-right: 1em;
-    margin-bottom: 0px;
-    margin-top: 5px;
     clear: both;
     color: #949ADD;
 }

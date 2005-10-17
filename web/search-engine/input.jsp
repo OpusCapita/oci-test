@@ -83,11 +83,15 @@
             Fill the form
           </legend>
           <input type="hidden" name="cmd" value="OCILogin"/>
-          <c:forEach items="${properties}" var="property" varStatus="status">
-            <label><c:out value="${property.key}:"/></label>
-            <html:text property="${property.key}" value="${property.value}" size="40"/><![CDATA[&nbsp]]>
-            <html:button property="" value="delete" onclick="deleteProperty('${property.key}')"/><br/>
-          </c:forEach>
+          <table cellspacing="2" cellpadding="0">
+            <c:forEach items="${properties}" var="property" varStatus="status">
+            <tr>
+              <td class="label"><label><c:out value="${property.key}:"/></label></td>
+              <td><html:text property="${property.key}" value="${property.value}" size="40"/><![CDATA[&nbsp]]></td>
+              <td><html:button property="" value="delete" onclick="deleteProperty('${property.key}')"/><br/></td>
+             </tr>
+            </c:forEach>
+          </table>
             <![CDATA[&nbsp]]>
           <html:submit value="do it" onclick="return run();"/>
             <![CDATA[&nbsp]]>
