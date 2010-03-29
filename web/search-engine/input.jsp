@@ -18,7 +18,7 @@
         var jcApplicationContextPath = '<jsp:expression>request.getContextPath()</jsp:expression>';
 
         function run() {
-          document.forms[0].action = document.forms[0].catalog_url.value;
+          //document.forms[0].action = document.forms[0].catalog_url.value;
           if (document.forms[0].targetFrame.value.length > 0) {
             document.forms[0].target = document.forms[0].targetFrame.value;
           } else {
@@ -43,6 +43,10 @@
 
         function back(){
           location.href="initOciIndex.do"
+        }
+
+        function useEncryption(checked){
+          alert(checked);
         }
 
       </script>
@@ -77,13 +81,18 @@
         </c:otherwise>
       </c:choose>
 
-      <form method="post">
+      <form method="post" action="processOciRequest.do">
         <fieldset>
           <legend>
             Fill the form
           </legend>
           <input type="hidden" name="cmd" value="OCILogin"/>
           <table cellspacing="2" cellpadding="0">
+            <tr>
+              <td class="label"><label><![CDATA[use encryption:]]></label></td>
+              <td><html:checkbox property="useEncryption" onclick="useEncryption(this.checked);"/></td>
+              <td><![CDATA[&nbsp]]></td>
+            </tr>
             <c:forEach items="${properties}" var="property" varStatus="status">
             <tr>
               <td class="label"><label><c:out value="${property.key}:"/></label></td>

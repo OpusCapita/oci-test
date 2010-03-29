@@ -22,4 +22,18 @@
     <property name="systemPropertiesMode"><value>2</value></property>
   </bean>
 
+
+  <bean name="ibmOciRequestEncrypter" class="com.jcatalog.ocisetest.security.IbmOciRequestEncrypter">
+    <property name="standardParams">
+      <list>
+       <value>FUNCTION</value>
+       <value>OCI_VERSION</value>
+       <value>HOOK_URL</value>
+       <value>~TARGET</value>
+       <value>~OkCode</value>
+       <value>~CALLER</value>
+     </list>
+    </property>
+  </bean>
+
 </beans>

@@ -31,6 +31,8 @@
     <property name="itemStorageManager"><ref bean="itemStorageManager"/></property>
   </bean>
 
-
+  <bean name="/processOciRequest" class="com.jcatalog.ocisetest.webapp.actions.ProcessOciRequestAction">
+    <property name="ociParametersEncrypter"><ref bean="ibmOciRequestEncrypter"/></property>
+  </bean>
 
 </beans>

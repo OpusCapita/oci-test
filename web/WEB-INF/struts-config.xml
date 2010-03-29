@@ -50,6 +50,10 @@
       <forward name="success" path="/showInputPage.do"/>
     </action>
 
+    <action path="/processOciRequest" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/search-engine/submit.jsp"/>
+    </action>
+
     <action path="/addPunchoutProperty" unknown="false" validate="false"
         name="propertyForm" scope="request"  type="org.springframework.web.struts.DelegatingActionProxy"
         parameter="addProperty">
