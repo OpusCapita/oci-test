@@ -83,24 +83,6 @@
       </properties>
     </dependency>
 
-     <!-- bouncycastle encryption-->
-    <dependency>
-      <groupId>bouncycastle</groupId>
-      <artifactId>bcpg-jdk15</artifactId>
-      <version>144</version>
-      <properties>
-        <war.bundle>true</war.bundle>
-      </properties>
-    </dependency>
-    <dependency>
-      <groupId>bouncycastle</groupId>
-      <artifactId>bcprov-jdk15</artifactId>
-      <version>144</version>
-      <properties>
-        <war.bundle>true</war.bundle>
-      </properties>
-    </dependency>
-
     <!-- log4j -->
     <dependency>
       <id>log4j</id>
