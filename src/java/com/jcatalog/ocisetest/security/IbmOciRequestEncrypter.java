@@ -24,9 +24,6 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
     private static final String SECRET_KEY_PARAM = "secretKey";
     private static final String ALGORITHM_TYPE = "DES";
     private Base64 base64 = new Base64();
-    private byte[] key;
-    private SecretKeySpec sks;
-    private Cipher algorithm;
     private List standardParams;
 
     public Map encrypt(Map params) throws Exception {
@@ -63,9 +60,9 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
     }
 
     private String encrypt(String keyString, String inputString) throws Exception {
-        key = keyString.getBytes();
-        sks = new SecretKeySpec(key, ALGORITHM_TYPE);
-        algorithm = Cipher.getInstance(ALGORITHM_TYPE);
+        byte[] key = keyString.getBytes();
+        SecretKeySpec sks = new SecretKeySpec(key, ALGORITHM_TYPE);
+        Cipher algorithm = Cipher.getInstance(ALGORITHM_TYPE);
         algorithm.init(Cipher.ENCRYPT_MODE, sks);
 
         byte[] encrypted = algorithm.doFinal(inputString.getBytes());
