@@ -46,11 +46,26 @@
     <load-on-startup>3</load-on-startup>
   </servlet>
 
+    <servlet>
+    <servlet-name>ociInboundServlet</servlet-name>
+    <servlet-class>com.jcatalog.ocisetest.webapp.servlets.OciInboundServlet</servlet-class>
+  </servlet>
+
   <!-- Action Servlet Mapping -->
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ociInboundServlet</servlet-name>
+    <url-pattern>/inbound/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ociInboundServlet</servlet-name>
+    <url-pattern>/inbound</url-pattern>
+  </servlet-mapping>
+
 
   <!-- The Welcome File List -->
   <welcome-file-list>

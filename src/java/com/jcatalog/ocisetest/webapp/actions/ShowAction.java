@@ -33,7 +33,7 @@ public class ShowAction extends Action {
         propertiesHolder.loadProperties();
         propertiesHolder.getProperties().setProperty("HOOK_URL",
             "http://" + request.getServerName() + ":" + request.getServerPort()
-            + request.getContextPath() + "/search-engine/inbound.jsp");
+            + request.getContextPath() + "/inbound");
         request.getSession().setAttribute("function", request.getParameter("function"));
 
         request.getSession().setAttribute("properties", propertiesHolder.getProperties());

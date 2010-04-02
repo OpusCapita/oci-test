@@ -54,6 +54,8 @@
       <forward name="success" path="/search-engine/submit.jsp"/>
     </action>
 
+    <action path="/inbound" forward="/search-engine/inbound.jsp"/>
+
     <action path="/addPunchoutProperty" unknown="false" validate="false"
         name="propertyForm" scope="request"  type="org.springframework.web.struts.DelegatingActionProxy"
         parameter="addProperty">

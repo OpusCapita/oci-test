@@ -20,6 +20,7 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
     private static final String PASSWORD_PARAM = "password";
     private static final String VALIDITY_INTERVAL_PARAM = "validityInterval";
     private static final String SECRET_KEY_PARAM = "secretKey";
+    private static final String HOOK_URL_PARAM = "HOOK_URL";
     private List standardParams;
 
     public Map encrypt(Map params) throws Exception {
@@ -35,6 +36,12 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
             String name = (String) param.getKey();
             String value = (String) param.getValue();
 
+            if (HOOK_URL_PARAM.equalsIgnoreCase(name)) {
+                //adding secret key to hook URL to use it during outbound processing (TEST FUNCTIONALITY ONLY)
+                encryptedParams.put(name, value + "/" + secretKey);
+                continue;
+            }
+
             if (standardParams.contains(name)) {
                 //standard params are not encrypted
                 encryptedParams.put(name, value);
@@ -44,7 +51,7 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
 
                     // setting valid interval to password
                     int validityInterval = StringUtils.isNotBlank(validityIntervalString)
-                        ? Integer.parseInt(validityIntervalString) : 0;
+                            ? Integer.parseInt(validityIntervalString) : 0;
                     Date validTo = new Date(System.currentTimeMillis()
                             + (validityInterval * 1000));
 
@@ -54,6 +61,8 @@ public class IbmOciRequestEncrypter implements OciRequestEncrypter {
                 encryptedParams.put(name, encryptor.encrypt(value));
             }
         }
+
+
         return encryptedParams;
     }
 
