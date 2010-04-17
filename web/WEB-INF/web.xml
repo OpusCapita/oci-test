@@ -18,6 +18,36 @@
     </param-value>
   </context-param>
 
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>com.jcatalog.commons.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contentType</param-name>
+      <param-value>text/html; charset=UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/inbound/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/inbound</url-pattern>
+  </filter-mapping>
+
   <listener>
     <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
   </listener>
@@ -25,7 +55,6 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-
 
   <!-- Action Servlet Configuration -->
   <servlet>
