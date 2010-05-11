@@ -5,17 +5,16 @@
     xmlns:c="http://java.sun.com/jstl/core">
 
   <jsp:directive.page import="com.jcatalog.oci.section.outbound.encryptor.Encryptor"/>
-    <jsp:directive.page import="java.util.Date"/>
+  <jsp:directive.page import="java.util.Date"/>
+  <jsp:directive.page import="org.apache.commons.codec.binary.Base64"/>
 
-    <jsp:scriptlet>
-
+  <jsp:scriptlet>
     // request.setCharacterEncoding(pageContext.getServletConfig().getServletContext().getInitParameter("characterEncoding"));
     String secretKey = (String) request.getAttribute("secretKey");
     if (secretKey != null) {
       Encryptor encryptor = new Encryptor(secretKey);
       pageContext.setAttribute("encryptor", encryptor);
     }
-
   </jsp:scriptlet>
 
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -27,7 +26,7 @@
       </title>
     </head>
     <body>
-    
+
     <c:if test="${not empty paramValues}">
       <form>
         <table width="100%">
@@ -44,6 +43,15 @@
                       <jsp:expression>
                         new Date(Long.parseLong(((Encryptor)pageContext.getAttribute("encryptor")).decrypt((String) pageContext.getAttribute("parameterValue"))))
                       </jsp:expression>
+                    </c:when>
+                    <c:when test="${'~xmlDocument'==parameter.key}">
+                      <jsp:scriptlet>
+                        Base64 base64 = new Base64();
+                        String encodedXml = (String) pageContext.getAttribute("parameterValue");
+                        String returnXML = new String(base64.decode(encodedXml.getBytes("UTF-8")));
+                        pageContext.setAttribute("returnXML", returnXML);
+                      </jsp:scriptlet>
+                      <c:out value="${returnXML}"/>
                     </c:when>
                     <c:otherwise>
                       <c:out value="${parameterValue}"/>
