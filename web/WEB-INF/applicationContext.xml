@@ -6,7 +6,7 @@
 
   <bean name="propertiesHolderFactory" class="com.jcatalog.ocisetest.properties.PropertiesHolderFactoryBean">
     <property name="baseDir">
-      <value>${ocisetest.root}/WEB-INF/conf/search-engine</value>
+      <value>${ocisetest.root}/WEB-INF/conf/opc</value>
     </property>
   </bean>
 

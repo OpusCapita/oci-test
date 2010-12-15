@@ -2,6 +2,7 @@ package com.jcatalog.ocisetest.webapp.actions;
 
 import com.jcatalog.ocisetest.properties.PropertiesHolder;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -31,9 +32,13 @@ public class ShowOciParametersAction extends Action {
         PropertiesHolder propertiesHolder = (PropertiesHolder) propertiesHolders.get(request
                     .getParameter("function"));
         propertiesHolder.loadProperties();
-        propertiesHolder.getProperties().setProperty("HOOK_URL",
-            "http://" + request.getServerName() + ":" + request.getServerPort()
-            + request.getContextPath() + "/inbound");
+
+        if (StringUtils.isEmpty(propertiesHolder.getProperties().getProperty("HOOK_URL"))) {
+            propertiesHolder.getProperties().setProperty("HOOK_URL",
+                "http://" + request.getServerName() + ":" + request.getServerPort()
+                + request.getContextPath() + "/inbound");
+        }
+
         request.getSession().setAttribute("function", request.getParameter("function"));
 
         request.getSession().setAttribute("properties", propertiesHolder.getProperties());

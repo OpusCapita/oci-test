@@ -17,24 +17,15 @@
   <action-mappings>
 
     <action path="/initOciIndex" type="org.springframework.web.struts.DelegatingActionProxy">
-      <forward name="success" path="/search-engine/index.jsp"/>
+      <forward name="success" path="/opc/index.jsp"/>
     </action>
 
     <action path="/initOciIndexFrame" type="org.springframework.web.struts.DelegatingActionProxy">
-      <forward name="success" path="/search-engine/indexFrame.jsp"/>
-    </action>
-
-    <action path="/initPunchoutIndex" type="org.springframework.web.struts.DelegatingActionProxy">
-      <forward name="success" path="/punchout-test/index.jsp"/>
+      <forward name="success" path="/opc/indexFrame.jsp"/>
     </action>
 
     <action path="/showOciParameters" type="org.springframework.web.struts.DelegatingActionProxy">
       <forward name="success" path="/showInputPage.do"/>
-    </action>
-
-    <action path="/showAddingPage" type="com.jcatalog.ocisetest.webapp.actions.ShowAddingPageAction">
-      <forward name="oci" path="/search-engine/add.jsp"/>
-      <forward name="punchout" path="/punchout-test/add.jsp"/>
     </action>
 
     <action path="/addOciProperty" unknown="false" validate="false"
@@ -51,79 +42,23 @@
     </action>
 
     <action path="/processOciRequest" type="org.springframework.web.struts.DelegatingActionProxy">
-      <forward name="success" path="/search-engine/submit.jsp"/>
+      <forward name="success" path="/opc/submit.jsp"/>
     </action>
 
-    <action path="/inbound" forward="/search-engine/inbound.jsp"/>
-
-    <action path="/addPunchoutProperty" unknown="false" validate="false"
-        name="propertyForm" scope="request"  type="org.springframework.web.struts.DelegatingActionProxy"
-        parameter="addProperty">
-      <forward name="success" path="/punchout-test/editSchema.jsp"/>
-    </action>
+    <action path="/inbound" forward="/opc/inbound.jsp"/>
 
     <action path="/saveOciConfiguration" type="org.springframework.web.struts.DelegatingActionProxy">
       <forward name="success" path="/showInputPage.do"/>
     </action>
 
-    <action path="/showInputPage" forward="/search-engine/input.jsp"/>
-
-    <action path="/deletePunchoutSchema" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="deleteSchema">
-      <forward name="success" path="/initPunchoutIndex.do"/>
-    </action>
-
-    <action path="/editPunchoutSchema" type="org.springframework.web.struts.DelegatingActionProxy"
-        parameter="editSchema">
-      <forward name="success" path="/punchout-test/editSchema.jsp"/>
-    </action>
-
-    <action path="/savePunchoutSchema" type="org.springframework.web.struts.DelegatingActionProxy"
-        parameter="saveSchema">
-      <forward name="success" path="/punchout-test/editSchema.jsp"/>
-    </action>
-
-    <action path="/duplicatePunchoutSchema" type="org.springframework.web.struts.DelegatingActionProxy"
-        parameter="duplicateSchema">
-      <forward name="success" path="/punchout-test/editSchema.jsp"/>
-    </action>
-
-    <action path="/deletePunchoutProperty" type="org.springframework.web.struts.DelegatingActionProxy"
-        parameter="deleteProperty">
-      <forward name="success" path="/punchout-test/editSchema.jsp"/>
-    </action>
+    <action path="/showInputPage" forward="/opc/input.jsp"/>
 
     <action path="/setActive" type="org.springframework.web.struts.DelegatingActionProxy"
          parameter="setActive">
       <forward name="success" path="/initPunchoutIndex.do"/>
     </action>
 
-    <action path="/applicationIndex" forward="/index.html"></action>
-
-    <action path="/punchoutTest" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="punchoutTest">
-      <forward name="success" path="/punchout-test/punchoutTestInput.jsp"/>
-    </action>
-
-    <action path="/copyItem" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="copyItem">
-      <forward name="success" path="/punchout-test/punchoutTestInput.jsp"/>
-    </action>
-
-    <action path="/deleteItem" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="deleteItem">
-      <forward name="success" path="/punchout-test/punchoutTestInput.jsp"/>
-    </action>
-
-    <action path="/saveItem" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="saveItem">
-      <forward name="success" path="/punchout-test/punchoutTestInput.jsp"/>
-    </action>
-
-    <action path="/showInboundData" type="org.springframework.web.struts.DelegatingActionProxy"
-         parameter="showInboundData">
-      <forward name="success" path="/punchout-test/redirect.jsp"/>
-    </action>
+    <action path="/applicationIndex" forward="/index.jsp"></action>
 
 
   </action-mappings>

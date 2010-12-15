@@ -26,7 +26,7 @@
     <property name="schemaHolderFactory"><ref bean="schemaHolderFactory"/></property>
   </bean>
 
-  <bean name="/punchoutTest,/copyItem,/deleteItem,/saveItem,/showInboundData" class="com.jcatalog.ocisetest.webapp.actions.PunchoutTestAction">
+  <bean name="/copyItem,/deleteItem,/saveItem,/showInboundData" class="com.jcatalog.ocisetest.webapp.actions.PunchoutTestAction">
     <property name="schemaHolderFactory"><ref bean="schemaHolderFactory"/></property>
     <property name="itemStorageManager"><ref bean="itemStorageManager"/></property>
   </bean>

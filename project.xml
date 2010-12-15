@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project>
-  <extend>${basedir}/../../jcatalog-parent/project.xml</extend>
-
   <name>OciTest Web application</name>
   <groupId>oci-test</groupId>
-  <artifactId>oci-test</artifactId>
+  <artifactId>opc-oci-test</artifactId>
 
   <currentVersion>0.1-SNAPSHOT</currentVersion>
   <inceptionYear>2004</inceptionYear>

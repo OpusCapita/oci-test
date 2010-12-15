@@ -17,12 +17,10 @@ public class PropertiesHolderImpl implements PropertiesHolder {
 
     public void loadProperties() throws Exception {
         properties = new Properties();
-        properties.load(new FileInputStream(defaultPropertiesFilePath));
-        File userPropertiesFile = userPropertiesFilePath;
-        if (userPropertiesFile.exists()) {
-            Properties userProperties = new Properties();
-            userProperties.load(new FileInputStream(userPropertiesFile));
-            properties.putAll(userProperties);
+        if (userPropertiesFilePath.exists()) {
+            properties.load(new FileInputStream(userPropertiesFilePath));
+        } else {
+            properties.load(new FileInputStream(defaultPropertiesFilePath));
         }
     }
 
