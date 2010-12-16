@@ -2,7 +2,7 @@
 
 <jsp:root version="1.2"
   xmlns:jsp="http://java.sun.com/JSP/Page"
-  xmlns:c="http://java.sun.com/jstl/core_rt"
+  xmlns:c="http://java.sun.com/jstl/core"
   xmlns:html="http://jakarta.apache.org/struts/tags-html-el">
 
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -48,11 +48,11 @@
           var form = document.getElementById("ociForm");
           var checked = document.getElementById("useEncryption").checked;
           if (form.secretKey) {
-            document.getElementById("secretKey").parentNode.parentNode.style.display = checked ? '' : 'none';
+            form.secretKey.parentNode.parentNode.style.display = checked ? '' : 'none';
             form.secretKey.style.disabled = checked ? '' : 'disabled';
           }
           if (form.validityInterval) {
-            document.getElementById("validityInterval").parentNode.parentNode.style.display = checked ? '' : 'none';
+            form.validityInterval.parentNode.parentNode.style.display = checked ? '' : 'none';
             form.validityInterval.style.disabled = checked ? '' : 'disabled';
           }
         }
@@ -102,7 +102,7 @@
               <td><![CDATA[&nbsp]]></td>
             </tr>
             <c:forEach items="${properties}" var="property" varStatus="status">
-              <tr id="<c:out value="${property.key}"/>">
+              <tr>
                 <td class="label">
                     <label>
                         <c:choose>
