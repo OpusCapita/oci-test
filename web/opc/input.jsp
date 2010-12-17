@@ -13,6 +13,7 @@
       <style type="text/css">
         @import url("<c:url value="/css/default.css"/>");
       </style>
+      <jsp:text><![CDATA[<script type="text/javascript" src="]]></jsp:text><c:url value="/js/cookies.js"/><jsp:text><![CDATA["></script>]]></jsp:text>
 
       <script language="javascript">
         var jcApplicationContextPath = '<jsp:expression>request.getContextPath()</jsp:expression>';
@@ -57,9 +58,18 @@
           }
         }
 
+        var OCI_ENCRYPTED_COOKIE_NAME = "oci-encrypted";
+        function restoreChecked(){
+            if (getCookie(OCI_ENCRYPTED_COOKIE_NAME) == "true"){
+                document.getElementById("useEncryption").checked = true;
+            }
+        }
+        function storeChecked(el){
+            setCookie(OCI_ENCRYPTED_COOKIE_NAME, el.checked);
+        }
       </script>
     </head>
-    <body onload="changeEncryptionVisibility()">
+    <body onload="restoreChecked();changeEncryptionVisibility();">
       <jsp:scriptlet>
 
         String url = "";
@@ -98,7 +108,7 @@
           <table cellspacing="2" cellpadding="0">
             <tr>
               <td class="label"><label><![CDATA[send values encrypted/encoded:]]></label></td>
-              <td><input type="checkbox" id="useEncryption" name="useEncryption" onclick="changeEncryptionVisibility()"/></td>
+              <td><input type="checkbox" id="useEncryption" name="useEncryption" onclick="storeChecked(this);changeEncryptionVisibility();"/></td>
               <td><![CDATA[&nbsp]]></td>
             </tr>
             <c:forEach items="${properties}" var="property" varStatus="status">
