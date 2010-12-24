@@ -28,6 +28,11 @@
       <forward name="success" path="/showInputPage.do"/>
     </action>
 
+    <action path="/showAddingPage" type="com.jcatalog.ocisetest.webapp.actions.ShowAddingPageAction">
+      <forward name="oci" path="/opc/add.jsp"/>
+      <forward name="punchout" path="/punchout-test/add.jsp"/>
+    </action>
+
     <action path="/addOciProperty" unknown="false" validate="false"
         name="propertyForm" scope="request"
         type="com.jcatalog.ocisetest.webapp.actions.OciPropertyAction"
