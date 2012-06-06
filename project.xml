@@ -3,7 +3,7 @@
 <project>
   <name>OciTest Web application</name>
   <groupId>oci-test</groupId>
-  <artifactId>opc-oci-test</artifactId>
+  <artifactId>oci-test</artifactId>
 
   <currentVersion>0.1-SNAPSHOT</currentVersion>
   <inceptionYear>2004</inceptionYear>
