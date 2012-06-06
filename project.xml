@@ -27,7 +27,7 @@
     <dependency>
       <groupId>com.jcatalog.modules</groupId>
       <artifactId>jcatalog-oci</artifactId>
-      <version>5.0-SNAPSHOT</version>
+      <version>5.0</version>
       <type>jar</type>
       <properties>
         <war.bundle>true</war.bundle>
