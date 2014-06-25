@@ -27,10 +27,10 @@
     </head>
     <body>
 
-    <c:if test="${not empty paramValues}">
+    <c:if test="${not empty sortedParametersMap}">
       <form>
         <table width="100%">
-          <c:forEach items="${paramValues}" var="parameter">
+          <c:forEach items="${sortedParametersMap}" var="parameter">
             <tr>
               <td width="25%">
                 <label><c:out value="${parameter.key}"/><![CDATA[&nbsp;:&nbsp;]]></label>
