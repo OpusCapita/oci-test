@@ -45,22 +45,22 @@ public class OciInboundServlet extends HttpServlet {
             public int compare(String str1, String str2) {
                 int itemPositionFirstString = 0;
                 int itemPositionSecondString = 0;
-                Matcher matcher = Pattern.compile("\\[([^]])|_([\\d])").matcher(str1);
+                Matcher matcher = Pattern.compile("\\[(\\d+)|_(\\d+)").matcher(str1);
                 if (matcher.find()) {
                     try {
                         itemPositionFirstString = Integer.parseInt(matcher.group(1) != null ? matcher.group(1) : matcher.group(2));
 
-                    } catch (NumberFormatException e) {
-                        log.info("NumberFormatException has occured, no item index was found");
+                    } catch (Exception e) {
+                        log.info("Exception has occurred, no item index was found "+e.getMessage());
                         return str1.compareTo(str2);
                     }
                 }
-                matcher = Pattern.compile("\\[([^]])|_([\\d])").matcher(str2);
+                matcher = Pattern.compile("\\[(\\d+)|_(\\d+)").matcher(str2);
                 if (matcher.find()) {
                     try {
                         itemPositionSecondString = Integer.parseInt(matcher.group(1) != null ? matcher.group(1) : matcher.group(2));
-                    } catch (NumberFormatException e) {
-                        log.info("NumberFormatException has occured, no item index was found");
+                    } catch (Exception e) {
+                        log.info("Exception has occurred, no item index was found "+e.getMessage());
                         return str1.compareTo(str2);
                     }
                 }
