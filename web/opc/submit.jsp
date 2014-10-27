@@ -7,9 +7,9 @@ xmlns:html="http://jakarta.apache.org/struts/tags-html-el">
 
 <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 
-<html>
+<html style="height:90%;">
   <head></head>
-  <body onload="document.forms['ociSubmit'].submit()">
+  <body onload="document.forms['ociSubmit'].submit()" style="height:100%;">
     <![CDATA[<form target="iframe" name="ociSubmit" action="]]><c:out value="${param.catalog_url}" /><![CDATA[" method="post">]]>
       <c:forEach items="${ociRequestParams}" var="item">
         <jsp:text><![CDATA[<input type="hidden" name="]]></jsp:text><c:out value="${item.key}"/><jsp:text><![CDATA[" value="]]></jsp:text><c:out value="${item.value}"/><jsp:text><![CDATA["/>]]></jsp:text>
