@@ -16,6 +16,9 @@ xmlns:html="http://jakarta.apache.org/struts/tags-html-el">
       </c:forEach>
    <![CDATA[</form>]]>
     <p>Application is loaded in iframe</p>
+    <p>Do not reload page with keyboard F5 in IE, because of IE wrong behaviour. Use button refresh to refresh iframe content.
+      <button type="button" onclick="document.forms['ociSubmit'].submit();">Refresh</button>
+    </p>
     <iframe id="iframe" name="iframe" frameborder="1" width="100%" height="100%"></iframe>
   </body>
 </html>
