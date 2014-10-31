@@ -19,7 +19,7 @@
         var jcApplicationContextPath = '<jsp:expression>request.getContextPath()</jsp:expression>';
 
         function run() {
-          if (document.forms[0].targetFrame.value.length > 0) {
+          if (document.forms[0].targetFrame.value.length > 0 &amp;&amp; document.forms[0].targetFrame.value !== 'iframe') {
             document.forms[0].target = document.forms[0].targetFrame.value;
           } else {
             document.forms[0].target = "_self";
