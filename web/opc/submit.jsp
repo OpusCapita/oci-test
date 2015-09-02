@@ -8,7 +8,11 @@ xmlns:html="http://jakarta.apache.org/struts/tags-html-el">
 <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 
 <html style="height:90%;">
-  <head></head>
+  <head>
+    <c:if test="${ociRequestParams.useIE7mode == 'on'}">
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    </c:if>
+  </head>
   <body onload="document.forms['ociSubmit'].submit()" style="height:100%;">
   <![CDATA[<form target="]]><c:out value="${ociRequestParams.targetFrame}"/><![CDATA[" name="ociSubmit" action="]]><c:out value="${param.catalog_url}" /><![CDATA[" method="post">]]>
       <c:forEach items="${ociRequestParams}" var="item">

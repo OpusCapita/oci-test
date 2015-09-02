@@ -59,13 +59,18 @@
         }
 
         var OCI_ENCRYPTED_COOKIE_NAME = "oci-encrypted";
+        var IE7_MODE_COOKIE_NAME = "ie7-mode";
         function restoreChecked(){
             if (getCookie(OCI_ENCRYPTED_COOKIE_NAME) == "true"){
                 document.getElementById("useEncryption").checked = true;
             }
+            if (getCookie(IE7_MODE_COOKIE_NAME) == "true"){
+                document.getElementById("useIE7mode").checked = true;
+            }
         }
-        function storeChecked(el){
-            setCookie(OCI_ENCRYPTED_COOKIE_NAME, el.checked);
+        function storeChecked(){
+            setCookie(OCI_ENCRYPTED_COOKIE_NAME, document.getElementById("useEncryption").checked);
+            setCookie(IE7_MODE_COOKIE_NAME, document.getElementById("useIE7mode").checked);
         }
       </script>
     </head>
@@ -108,7 +113,12 @@
           <table cellspacing="2" cellpadding="0">
             <tr>
               <td class="label"><label><![CDATA[send values encrypted/encoded:]]></label></td>
-              <td><input type="checkbox" id="useEncryption" name="useEncryption" onclick="storeChecked(this);changeEncryptionVisibility();"/></td>
+              <td><input type="checkbox" id="useEncryption" name="useEncryption" onclick="storeChecked();changeEncryptionVisibility();"/></td>
+              <td><![CDATA[&nbsp]]></td>
+            </tr>
+            <tr>
+              <td class="label"><label><![CDATA[set IE7 compatibility mode:]]></label></td>
+              <td><input type="checkbox" id="useIE7mode" name="useIE7mode" onclick="storeChecked();"/></td>
               <td><![CDATA[&nbsp]]></td>
             </tr>
             <c:forEach items="${properties}" var="property" varStatus="status">
