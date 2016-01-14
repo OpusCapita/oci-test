@@ -21,6 +21,9 @@
           <li><html:link action="/showOciParameters.do?function=${action}"><c:out value="${action}"/></html:link></li>
         </c:forEach>
       </ul>
+      <ul>OPC Ariba test
+        <li><a href="ariba-test/createSetupRequest.jsp">Ariba Tester</a></li>
+      </ul>
     </body>
 
   </html>
