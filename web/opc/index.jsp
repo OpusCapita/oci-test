@@ -10,6 +10,12 @@
   <html>
 
     <head>
+      <script>
+        function openInWindowWithoutScroll() {
+          window.open(window.location.href, 'testWindow',
+                  "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,width=1300,height=900");
+        }
+      </script>
       <style type="text/css">
         @import url("<c:url value="/css/default.css"/>");
       </style>
@@ -24,6 +30,12 @@
       <ul>OPC Ariba test
         <li><a href="ariba-test/createSetupRequest.jsp">Ariba Tester</a></li>
       </ul>
+
+      <div style="margin-left:25px;">
+        Open OCI test window without scroll
+        <br/><small>Need for testing 'enableScrollbar' parameter for OCI login into OPC from SAP SRM systems.</small><br/><br/>
+        <a href="#" onclick="openInWindowWithoutScroll();">OPC OCI test without scroll</a>
+      </div>
     </body>
 
   </html>
