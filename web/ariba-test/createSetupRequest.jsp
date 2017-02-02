@@ -11,7 +11,7 @@ Enter the supplier ACSN ID (the tester on ACSN sends the ID instead of the DUNS)
 
 
 <BR><input type="submit" name="submit"><BR>
-After clicking submit view source. You will see cxml responce there.
+After clicking submit view source. You will see cxml response there.
 <BR> Notice the cXML is not inside a FORM variable if send by Ariba Buyer/ACSN.
 
 <BR><BR>Cxml PunchoutSetupRequest:<BR>

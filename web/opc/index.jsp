@@ -30,6 +30,9 @@
       <ul>OPC Ariba test
         <li><a href="ariba-test/createSetupRequest.jsp">Ariba Tester</a></li>
       </ul>
+      <ul>OPC Oracle Transparent Punchout test
+        <li><a href="oracle-transparent-punchout-test/createItemSearchRequest.jsp">Oracle Transparent Punchout Tester</a></li>
+      </ul>
 
       <div style="margin-left:25px;">
         Open OCI test window without scroll
