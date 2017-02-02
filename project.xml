@@ -5,7 +5,7 @@
   <groupId>oci-test</groupId>
   <artifactId>oci-test</artifactId>
 
-  <currentVersion>0.1-SNAPSHOT</currentVersion>
+  <currentVersion>0.2-SNAPSHOT</currentVersion>
   <inceptionYear>2004</inceptionYear>
 
   <description>
