@@ -23,12 +23,10 @@ defaults: &defaults
   working_directory: ~/build
 
 jobs:
-  build:
-    <<: *defaults
+  inject-environment:
+    docker:
+      - image: opuscapita/minsk-core-machineuser-env:1
     steps:
-      - run: *inject-environment
-      - checkout
-      - restore_cache: *restore-cache
       - run:
           name: Inject secrets from vault to CircleCI project's environment
           command: |
@@ -38,6 +36,11 @@ jobs:
               MAVEN_REPO JFROG_USER JFROG_PASSWD \
               CIRCLE_CI_TOKEN \
               SSH_KEY DOCUMENTATION_STORAGE_HOST
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-cache
       - run: 
           name: Build oci-test
           command: clean war:war
@@ -45,4 +48,7 @@ workflows:
   version: 2
   build-and-deploy-to-cloud:
     jobs:
-      - build
+      - inject-environment
+      - build:
+	  requires:
+            - inject-environment
