@@ -5,15 +5,6 @@ aliases:
     name: Inject environment
     command: /bin/env_inject.sh
 
-  - &restore-cache
-    keys:
-      - v1-{{ checksum "package.json" }}
-
-  - &save-cache
-    key: v1-{{ checksum "package.json" }}
-    paths:
-      - ./node_modules
-
 defaults: &defaults
   docker:
     - image: opuscapita/minsk-core-ci:grails-2.4.4-jdk-8u131-nodejs-6.9.4-maven-3.3.9
@@ -40,7 +31,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache: *restore-cache
       - run: 
           name: Build oci-test
           command: clean war:war
