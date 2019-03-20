@@ -33,7 +33,7 @@ jobs:
       - checkout
       - run: 
           name: Build oci-test
-          command: clean war:war
+          command: mvn clean war:war
 workflows:
   version: 2
   build:
