@@ -1,17 +1,10 @@
 package com.jcatalog.ocisetest.properties;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
-import java.util.*;
-
+import java.io.*;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class Properties extends LinkedHashMap {
     private static final long serialVersionUID = 4112578634029874840L;
@@ -22,7 +15,7 @@ public class Properties extends LinkedHashMap {
 
     /** A table of hex digits */
     private static final char[] hexDigit = {
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
     };
 
     /**
@@ -79,7 +72,7 @@ public class Properties extends LinkedHashMap {
      * href="http://java.sun.com/docs/books/jls/second_edition/html/lexical.doc.html#101089">&sect;3.10.6</a>
      * of the <i>Java Language Specification</i>). The differences from the character
      * escape sequences used for characters and strings are:
-     * 
+     *
      * <ul>
      * <li>
      * Octal escapes are not recognized.
@@ -102,10 +95,10 @@ public class Properties extends LinkedHashMap {
      * single and double quote characters, respectively.
      * </li>
      * </ul>
-     * 
+     *
      * An <code>IllegalArgumentException</code> is thrown if a malformed Unicode escape
      * appears in the input.
-     * 
+     *
      * <p>
      * This method processes input in terms of lines.  A natural line of input is
      * terminated either by a set of line terminator characters (<code>\n</code> or
@@ -120,7 +113,7 @@ public class Properties extends LinkedHashMap {
      * also described below.  Lines are read from the input stream until end of file is
      * reached.
      * </p>
-     * 
+     *
      * <p>
      * A natural line that contains only white space characters is considered blank and
      * is ignored.  A comment line has an ASCII <code>'#'</code> or <code>'!'</code> as
@@ -130,7 +123,7 @@ public class Properties extends LinkedHashMap {
      * (<code>'\t'</code>, <code>'&#92;u0009'</code>), and form feed (<code>'\f'</code>,
      * <code>'&#92;u000C'</code>) to be white space.
      * </p>
-     * 
+     *
      * <p>
      * If a logical line is spread across several natural lines, the backslash escaping
      * the line terminator sequence, the line terminator sequence, and any white space
@@ -145,7 +138,7 @@ public class Properties extends LinkedHashMap {
      * backslashes before a line terminator (or elsewhere) encodes <i>n</i> backslashes
      * after escape processing.
      * </p>
-     * 
+     *
      * <p>
      * The key contains all of the characters in the line starting with the first
      * non-white space character and up to, but not including, the first unescaped
@@ -153,11 +146,11 @@ public class Properties extends LinkedHashMap {
      * terminator. All of these key termination characters may be included in the key by
      * escaping them with a preceding backslash character; for example,
      * </p>
-     * 
+     *
      * <p>
      * <code>\:\=</code>
      * </p>
-     * 
+     *
      * <p>
      * would be the two-character key <code>":="</code>.  Line terminator characters can
      * be included using <code>\r</code> and <code>\n</code> escape sequences.  Any
@@ -169,12 +162,12 @@ public class Properties extends LinkedHashMap {
      * raw character sequences constituting the key and element are identified, escape
      * processing is performed as described above.
      * </p>
-     * 
+     *
      * <p>
      * As an example, each of the following three lines specifies the key
      * <code>"Truth"</code> and the associated element value <code>"Beauty"</code>:
      * </p>
-     * 
+     *
      * <p>
      * <pre>
      * Truth = Beauty
@@ -183,7 +176,7 @@ public class Properties extends LinkedHashMap {
      * </pre>
      * As another example, the following three lines specify a single property:
      * </p>
-     * 
+     *
      * <p>
      * <pre>
      * fruits                           apple, banana, pear, \
@@ -192,7 +185,7 @@ public class Properties extends LinkedHashMap {
      * </pre>
      * The key is <code>"fruits"</code> and the associated element is:
      * </p>
-     * 
+     *
      * <p>
      * <pre>"apple, banana, pear, cantaloupe, watermelon, kiwi, mango"</pre>
      * Note that a space appears before each <code>\</code> so that a space will appear
@@ -200,18 +193,18 @@ public class Properties extends LinkedHashMap {
      * leading white space on the continuation line are merely discarded and are
      * <i>not</i> replaced by one or more other characters.
      * </p>
-     * 
+     *
      * <p>
      * As a third example, the line:
      * </p>
-     * 
+     *
      * <p>
      * <pre>cheeses
      * </pre>
      * specifies that the key is <code>"cheeses"</code> and the associated element is the
      * empty string <code>""</code>.
      * </p>
-     * 
+     *
      * <p></p>
      *
      * @param inStream the input stream.
@@ -255,7 +248,7 @@ public class Properties extends LinkedHashMap {
                         // Advance beyond whitespace on new line
                         int startIndex;
                         for (startIndex = 0; startIndex < nextLine.length();
-                                startIndex++) {
+                             startIndex++) {
                             if (whiteSpaceChars.indexOf(nextLine.charAt(startIndex)) == -1) {
                                 break;
                             }
@@ -268,7 +261,7 @@ public class Properties extends LinkedHashMap {
                     // Find separation between key and value
                     int separatorIndex;
                     for (separatorIndex = keyStart; separatorIndex < len;
-                            separatorIndex++) {
+                         separatorIndex++) {
                         char currentChar = line.charAt(separatorIndex);
                         if (currentChar == '\\') {
                             separatorIndex++;
@@ -301,7 +294,7 @@ public class Properties extends LinkedHashMap {
                     }
                     String key = line.substring(keyStart, separatorIndex);
                     String value = (separatorIndex < len)
-                        ? line.substring(valueIndex, len) : "";
+                            ? line.substring(valueIndex, len) : "";
 
                     // Convert then store key and value
                     key = loadConvert(key);
@@ -374,7 +367,7 @@ public class Properties extends LinkedHashMap {
                                 break;
                             default:
                                 throw new IllegalArgumentException(
-                                    "Malformed \\uxxxx encoding.");
+                                        "Malformed \\uxxxx encoding.");
                         }
                     }
                     outBuffer.append((char) value);
@@ -477,25 +470,25 @@ public class Properties extends LinkedHashMap {
      * table to the output stream in a format suitable for loading into a
      * <code>Properties</code> table using the {@link #load(InputStream) load} method.
      * The stream is written using the ISO 8859-1 character encoding.
-     * 
+     *
      * <p>
      * Properties from the defaults table of this <code>Properties</code> table (if any)
      * are <i>not</i> written out by this method.
      * </p>
-     * 
+     *
      * <p>
      * If the header argument is not null, then an ASCII <code>#</code> character, the
      * header string, and a line separator are first written to the output stream. Thus,
      * the <code>header</code> can serve as an identifying comment.
      * </p>
-     * 
+     *
      * <p>
      * Next, a comment line is always written, consisting of an ASCII <code>#</code>
      * character, the current date and time (as if produced by the <code>toString</code>
      * method of <code>Date</code> for the current time), and a line separator as
      * generated by the Writer.
      * </p>
-     * 
+     *
      * <p>
      * Then every entry in this <code>Properties</code> table is written out, one per
      * line. For each entry the key string is written, then an ASCII <code>=</code>,
@@ -513,7 +506,7 @@ public class Properties extends LinkedHashMap {
      * and <code>:</code> are written with a preceding backslash to ensure that they are
      * properly loaded.
      * </p>
-     * 
+     *
      * <p>
      * After the entries have been written, the output stream is flushed.  The output
      * stream remains open after this method returns.
