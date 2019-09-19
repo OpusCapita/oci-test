@@ -1,5 +1,6 @@
 package com.jcatalog.ocisetest.properties
 
+import grails.util.Holders
 import org.springframework.beans.factory.FactoryBean
 
 /**
@@ -7,24 +8,24 @@ import org.springframework.beans.factory.FactoryBean
  * depending on the existing configuration file
  */
 class PropertiesHolderFactoryBean implements FactoryBean {
-    private File baseDir
+    private File baseDir = Holders.grailsApplication.mainContext.getResource('WEB-INF/conf/opc').getFile()
 
-    void setBaseDir(File baseDir) {
-        this.baseDir = baseDir
-    }
+//    void setBaseDir(File baseDir) {
+//        this.baseDir = baseDir
+//    }
 
     @Override
     Object getObject() throws Exception {
-        File[] files = new File(baseDir, 'default').listFiles()
-        def propertiesHolders = [:]
+        File[] files = new File(baseDir, "default").listFiles()
+        Map propertiesHolders = new HashMap()
 
         for (int i = 0; i < files.length; i++) {
-            def propsHolder = new PropertiesHolderImpl()
-            propsHolder.setDefaultPropertiesFilePath(files[i])
-            propsHolder.setUserPropertiesFilePath(new File(baseDir,
-                    'user//' + files[i].getName()))
-            def fileName = files[i].getName()
-            propertiesHolders[fileName[0, fileName.indexOf('.')]] = propsHolder
+            PropertiesHolder propertiesHolder = new PropertiesHolderImpl()
+            propertiesHolder.setDefaultPropertiesFilePath(files[i])
+            propertiesHolder.setUserPropertiesFilePath(new File(baseDir,
+                    "user//" + files[i].getName()))
+            propertiesHolders.put(files[i].getName().substring(0,
+                    files[i].getName().indexOf(".")), propertiesHolder)
         }
         return propertiesHolders
     }

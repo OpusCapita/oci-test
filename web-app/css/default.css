@@ -51,7 +51,6 @@ legend {
     margin-bottom: 5px;
 }
 
-input, textarea {
+input, textarea, button {
     border: #949ABD solid 1px;
 }
-
