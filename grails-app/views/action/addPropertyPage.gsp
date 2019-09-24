@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<g:form controller="index" action="addPropertyAction">
+<g:form controller="action" action="addPropertyAction">
     <fieldset>
         <legend>
             Input new property parameters

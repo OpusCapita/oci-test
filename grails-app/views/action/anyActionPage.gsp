@@ -55,7 +55,7 @@
                         <g:textField name="${property.key}" style="width: 25em" value="${property.value}"/>
                     </td>
                     <g:if test="${property.key != 'secretKey' && property.key != 'validityInterval'}">
-                        <td><button value="delete"><g:link style="color: #111122" controller="index"
+                        <td><button value="delete"><g:link style="color: #111122" controller="action"
                                                            action="deletePropertyAction"
                                                            params="[rowToRemove: property?.key]">delete</g:link></button>
                         </td>

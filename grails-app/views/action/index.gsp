@@ -16,7 +16,7 @@
 <body>
 <ul>OPC OCI test
     <g:each in="${actions}" var="actionLink">
-        <li><g:link controller="index" action="anyActionPage"
+        <li><g:link controller="action" action="anyActionPage"
                     params="[actionlink: actionLink]">${actionLink}</g:link></li>
     </g:each>
 </ul>
@@ -24,8 +24,7 @@
     <li><g:link controller="tester" action="aribaTesterPage">Ariba Tester</g:link></li>
 </ul>
 <ul>OPC Oracle Transparent Punchout test
-    <li><a href="oracle-transparent-punchout-test/createItemSearchRequest.jsp">Oracle Transparent Punchout Tester</a>
-    </li>
+    <li><g:link controller="tester" action="punchoutTesterPage">Oracle Transparent Punchout Tester</g:link></li>
 </ul>
 
 <div style="margin-left:25px;">

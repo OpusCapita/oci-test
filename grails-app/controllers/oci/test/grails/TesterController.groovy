@@ -6,10 +6,9 @@ import org.apache.commons.httpclient.methods.PostMethod
 
 class TesterController {
 
-    def aribaTesterPage() {}
-
-    def aribaTesterAction() {
-        String cxmltosend = request.getParameter("cxmltosend")
+    // handle form submission from ariba tester and punchout tester
+    def handleTesterAction() {
+        String cxmltosend = request.getParameter("xmltosend")
         String urltotest = request.getParameter("urltotest")
 
         PostMethod post = new PostMethod(urltotest)
@@ -24,6 +23,10 @@ class TesterController {
         int result = httpclient.executeMethod(post)
         String strXML = post.getResponseBodyAsString()
         post.releaseConnection()
-        [strXML: strXML]
+        render(text: strXML, contentType: "text/xml", encoding: "UTF-8")
     }
+
+    def aribaTesterPage() {}
+
+    def punchoutTesterPage() {}
 }

@@ -3,7 +3,7 @@ package oci.test.grails
 import com.jcatalog.ocisetest.properties.PropertiesHolder
 import com.jcatalog.ocisetest.properties.PropertyUtils
 
-class IndexController {
+class ActionController {
     def propertiesHolderFactory
     def ibmOciRequestEncrypter
     def indexService

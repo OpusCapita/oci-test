@@ -11,7 +11,7 @@
 
 <body>
 
-<g:form action="aribaTesterAction" method="POST">
+<g:form action="handleTesterAction" method="POST">
     <h3>Mimic an Ariba Punchout Setup Request</h3>
 
     URL to Test: <input type="text" name="urltotest" size="70"
@@ -26,7 +26,7 @@
 
     <BR><BR>Cxml PunchoutSetupRequest:<BR>
 
-    <textarea cols="80" rows="25" name="cxmltosend"><?xml version="1.0" encoding="UTF-8"?>
+    <textarea cols="80" rows="25" name="xmltosend"><?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE cXML SYSTEM "http://xml.cXML.org/schemas/cXML/1.1.009/cXML.dtd">
         <cXML timestamp="2000-11-10T05:26:11-08:00" payloadID="973862771707--4512288394343725421@206.251.25.165"
               version="1.1.009">
