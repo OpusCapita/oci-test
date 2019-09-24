@@ -15,7 +15,6 @@ class IbmOciRequestEncrypter implements OciRequestEncrypter {
         String secretKey = params.get(SECRET_KEY_PARAM) as String
         Encryptor encryptor = new Encryptor(secretKey)
 
-//        for (Iterator iterator = params.entrySet().iterator(); iterator.hasNext();) {
         params.entrySet().each {
             Map.Entry param = it as Map.Entry
             String name = param.getKey() as String
@@ -24,7 +23,6 @@ class IbmOciRequestEncrypter implements OciRequestEncrypter {
             if (HOOK_URL_PARAM.equalsIgnoreCase(name)) {
                 //adding secret key to hook URL to use it during outbound processing (TEST FUNCTIONALITY ONLY)
                 encryptedParams[name] = value + "/" + secretKey
-//                continue
             }
 
             if (standardParams.contains(name)) {

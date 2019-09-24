@@ -9,12 +9,12 @@ class PropertyUtils {
     static def updatePropertyValues(HttpServletRequest request) {
         Set keys = request.getParameterMap().keySet()
         Properties properties = request.getSession().getAttribute('properties') as Properties
-//        for (Iterator i = properties.keySet().iterator(); i.hasNext();) {
         properties.keySet().each {
             def key = it as String
             if (keys.contains(key)) {
                 properties.setProperty(key, request.getParameter(key))
             }
         }
+        return properties
     }
 }

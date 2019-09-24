@@ -10,8 +10,7 @@
 <head>
     <title>oci-test</title>
     <meta name="layout" content="main"/>
-    <r:external uri="/css/default.css"/>
-    <r:require modules="jsUtils, jquery"/>
+    <r:require modules="frontUtils, jquery"/>
 </head>
 
 <body>

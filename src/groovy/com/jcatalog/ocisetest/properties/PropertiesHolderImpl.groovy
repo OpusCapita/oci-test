@@ -8,7 +8,6 @@ class PropertiesHolderImpl implements PropertiesHolder {
     private File userPropertiesFilePath = null
     private Properties properties = null
 
-
     @Override
     void loadProperties() throws Exception {
         properties = new Properties()

@@ -10,10 +10,6 @@ import org.springframework.beans.factory.FactoryBean
 class PropertiesHolderFactoryBean implements FactoryBean {
     private File baseDir = Holders.grailsApplication.mainContext.getResource('WEB-INF/conf/opc').getFile()
 
-//    void setBaseDir(File baseDir) {
-//        this.baseDir = baseDir
-//    }
-
     @Override
     Object getObject() throws Exception {
         File[] files = new File(baseDir, "default").listFiles()

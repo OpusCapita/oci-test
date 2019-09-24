@@ -28,12 +28,10 @@ class ItemStorageManager {
         List items = itemStorage.items
         List indexedItems = []
         int counter = 1
-//        for (Iterator iterator = items.iterator(); iterator.hasNext();) {
         items.each {
             def properties = it as Properties
             def indexedProperties = new Properties()
             Set keys = properties.keySet()
-//            for (Iterator iter = keys.iterator(); iter.hasNext();) {
             keys.each {
                 String key = it as String
                 def value = properties.getProperty(key)

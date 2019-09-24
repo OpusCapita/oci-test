@@ -10,19 +10,15 @@
 <head>
     <title>oci-test</title>
     <meta name="layout" content="main"/>
-    <r:external uri="/css/default.css"/>
-    <r:require modules="jsUtils, jquery"/>
+    <r:require modules="frontUtils, jquery"/>
 </head>
 
 <body>
 <ul>OPC OCI test
-%{--<c:forEach items="${actions}" var="action">--}%
-%{--<li><html:link action="/showOciParameters.do?function=${action}"><c:out value="${action}"/></html:link></li>--}%
-%{--</c:forEach>--}%
     <g:each in="${actions}" var="actionLink">
-        <li><g:link controller="index" action="route66" params="[actionlink: actionLink]">${actionLink}</g:link></li>
+        <li><g:link controller="index" action="anyActionPage"
+                    params="[actionlink: actionLink]">${actionLink}</g:link></li>
     </g:each>
-%{--<li><a href="http://google.com">Google</a></li>--}%
 </ul>
 <ul>OPC Ariba test
     <li><a href="index/createSetupRequest.gsp">Ariba Tester</a></li>
