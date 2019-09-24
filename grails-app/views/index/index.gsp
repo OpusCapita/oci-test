@@ -21,7 +21,7 @@
     </g:each>
 </ul>
 <ul>OPC Ariba test
-    <li><a href="index/createSetupRequest.gsp">Ariba Tester</a></li>
+    <li><g:link controller="tester" action="aribaTesterPage">Ariba Tester</g:link></li>
 </ul>
 <ul>OPC Oracle Transparent Punchout test
     <li><a href="oracle-transparent-punchout-test/createItemSearchRequest.jsp">Oracle Transparent Punchout Tester</a>
