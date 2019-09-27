@@ -1,6 +1,6 @@
-package com.jcatalog.ocisetest.security
+package com.opuscapita.ocisetest.security
 
-import com.jcatalog.ocisetest.properties.Encryptor
+import com.opuscapita.ocisetest.properties.Encryptor
 
 class IbmOciRequestEncrypter implements OciRequestEncrypter {
     private static final String PASSWORD_PARAM = "password"
@@ -15,14 +15,16 @@ class IbmOciRequestEncrypter implements OciRequestEncrypter {
         String secretKey = params.get(SECRET_KEY_PARAM) as String
         Encryptor encryptor = new Encryptor(secretKey)
 
-        params.entrySet().each {
-            Map.Entry param = it as Map.Entry
+        for (Iterator iterator = params.entrySet().iterator(); iterator.hasNext();) {
+            Map.Entry param = iterator.next() as Map.Entry
+
             String name = param.getKey() as String
             String value = param.getValue() as String
 
             if (HOOK_URL_PARAM.equalsIgnoreCase(name)) {
                 //adding secret key to hook URL to use it during outbound processing (TEST FUNCTIONALITY ONLY)
                 encryptedParams[name] = value + "/" + secretKey
+                continue
             }
 
             if (standardParams.contains(name)) {

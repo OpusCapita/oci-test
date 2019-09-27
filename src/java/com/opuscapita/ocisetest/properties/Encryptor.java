@@ -1,4 +1,4 @@
-package com.jcatalog.ocisetest.properties;
+package com.opuscapita.ocisetest.properties;
 
 import org.apache.commons.codec.binary.Base64;
 

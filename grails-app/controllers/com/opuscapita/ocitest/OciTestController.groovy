@@ -1,14 +1,15 @@
-package oci.test.grails
+package com.opuscapita.ocitest
 
-import com.jcatalog.ocisetest.properties.PropertiesHolder
-import com.jcatalog.ocisetest.properties.PropertyUtils
+import com.opuscapita.ocisetest.properties.PropertiesHolder
+import com.opuscapita.ocisetest.properties.PropertyUtils
+import org.apache.commons.httpclient.HttpClient
+import org.apache.commons.httpclient.methods.EntityEnclosingMethod
+import org.apache.commons.httpclient.methods.PostMethod
 
-class ActionController {
+class OciTestController {
     def propertiesHolderFactory
-    def ibmOciRequestEncrypter
-    def indexService
+    def ibmOciRequestEncryptor
 
-    // index page with all available functions (action) to do
     def index() {
         def actions = applicationContext.getBean('propertiesHolderFactory') as Map
         [actions: actions.keySet()]
@@ -18,7 +19,7 @@ class ActionController {
      * Method determine a link on index page (search, retrieveoci, ociLogin, etc.) that user clicked on
      * and generate appropriate form to fill and submit.
      */
-    def anyActionPage() {
+    def ociTestAction() {
         def propertiesHolders = propertiesHolderFactory as Map
         String action = params.actionlink as String
         PropertiesHolder propertiesHolder = propertiesHolders.get(action) as PropertiesHolder
@@ -35,31 +36,24 @@ class ActionController {
         [propertiesMap: propertiesHolder.properties]
     }
 
-    // handle 'do it' button
     def doIt() {
         Map ociRequestParams = params?.useEncryption == 'on' ?
-                ibmOciRequestEncrypter.encrypt(indexService.getRequestParams(request)) :
-                indexService.getRequestParams(request)
+                ibmOciRequestEncryptor.encrypt(params) :
+                params
         /*
         '_action_ + ${method_name}! do not change string below w/o renaming method and vice versa
         For some reason there is an incorrect behavior with this parameter in form; necessarily to remove it from params
          */
         ociRequestParams.remove('_action_doIt')
-        request.setAttribute("ociRequestParams", ociRequestParams)
         [ociRequestParams: ociRequestParams]
     }
 
-    // method just to show 'add property' page
-    def addPropertyPage() {}
-
-    // action to handle new property submitting
-    def addPropertyAction() {
+    def addProperty() {
         session.getAttribute('properties').putAt(params.name, params.value)
-        render(view: 'anyActionPage', model: [propertiesMap: session.getAttribute('properties')])
+        render(view: 'ociTestAction', model: [propertiesMap: session.getAttribute('properties')])
     }
 
-    // action to handle deleting existing property
-    def deletePropertyAction() {
+    def deleteProperty() {
         def propertiesHolders = session.getAttribute('properties') as Map
         propertiesHolders.remove(params.rowToRemove)
         session.removeAttribute('properties')
@@ -67,15 +61,45 @@ class ActionController {
         propertiesHolders.each {
             (session.getAttribute('properties')[it.key as String] = (it.value as String))
         }
-        render(view: 'anyActionPage', model: [propertiesMap: session.getAttribute('properties')])
+        render(view: 'ociTestAction', model: [propertiesMap: session.getAttribute('properties')])
     }
 
-    // action to handle configuration saving
-    def saveConfigurationAction() {
+    def saveConfiguration() {
         def propertiesHolders = propertiesHolderFactory as Map
         PropertiesHolder propertiesHolder = propertiesHolders.get(session.getAttribute("function")) as PropertiesHolder
         propertiesHolder.properties = PropertyUtils.updatePropertyValues(request)
         propertiesHolder.saveProperties()
-        render(view: 'anyActionPage', model: [propertiesMap: propertiesHolder.properties, saveFlag: true])
+        render(view: 'ociTestAction', model: [propertiesMap: propertiesHolder.properties, saveFlag: true])
+    }
+
+    def handleTester() {
+        String cxmltosend = request.getParameter("xmltosend")
+        String urltotest = request.getParameter("urltotest")
+
+        PostMethod post = new PostMethod(urltotest)
+        post.setRequestBody(new ByteArrayInputStream(cxmltosend.getBytes()))
+
+        cxmltosend.length() < Integer.MAX_VALUE ?
+                post.setRequestContentLength(cxmltosend.length()) :
+                post.setRequestContentLength(EntityEnclosingMethod.CONTENT_LENGTH_CHUNKED)
+
+        post.setRequestHeader("Content-type", "text/xml; charset=ISO-8859-1")
+        HttpClient httpclient = new HttpClient()
+        int result = httpclient.executeMethod(post)
+        String strXML = post.getResponseBodyAsString()
+        post.releaseConnection()
+        render(text: strXML, contentType: "text/xml", encoding: "UTF-8")
+    }
+
+    def showAddProperty() {
+        render(view: 'addProperty')
+    }
+
+    def showAribaTester() {
+        render(view: 'aribaTester')
+    }
+
+    def showPunchoutTester() {
+        render(view: 'punchoutTester')
     }
 }

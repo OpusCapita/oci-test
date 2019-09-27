@@ -1,4 +1,4 @@
-package com.jcatalog.ocisetest.properties
+package com.opuscapita.ocisetest.properties
 
 import javax.servlet.http.HttpServletRequest
 

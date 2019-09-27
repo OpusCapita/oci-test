@@ -1,4 +1,4 @@
-package com.jcatalog.ocisetest.security
+package com.opuscapita.ocisetest.security
 
 /**
  * Encrypts OCI request parameters.

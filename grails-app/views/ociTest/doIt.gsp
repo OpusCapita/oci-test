@@ -19,9 +19,10 @@
 <r:script>
     window.onload = function () {
         document.forms['ociSubmit'].submit();
+        window.close();
     };
 </r:script>
-<form target="${ociRequestParams.targetFrame}" name="ociSubmit" action="${ociRequestParams.catalog_url}" method="post">
+<form target="${params.targetFrame}" name="ociSubmit" action="${params.catalog_url}" method="post">
     <g:each in="${ociRequestParams}" var="item">
         <input type="hidden" name="${item.key}" value="${item.value}"><br/>
     </g:each>

@@ -3,26 +3,9 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="propertiesHolderFactory" class="com.jcatalog.ocisetest.properties.PropertiesHolderFactoryBean">
-        <!--<property name="baseDir">-->
-        <!--<value>${ocisetest.root}/WEB-INF/conf/opc</value>-->
-        <!--</property>-->
-    </bean>
+    <bean name="propertiesHolderFactory" class="com.opuscapita.ocisetest.properties.PropertiesHolderFactoryBean"/>
 
-    <bean name="schemaHolderFactory" class="com.jcatalog.ocisetest.schemas.SchemaHolderFactory" init-method="init">
-        <!--<property name="baseDir">-->
-        <!--<value>${ocisetest.root}/WEB-INF/conf/punchout</value>-->
-        <!--</property>-->
-    </bean>
-
-    <bean name="itemStorageManager" class="com.jcatalog.ocisetest.schemas.ItemStorageManager"/>
-
-    <!--<bean id="sysPropsPP" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-    <!--<property name="systemPropertiesMode"><value>2</value></property>-->
-    <!--</bean>-->
-
-
-    <bean name="ibmOciRequestEncrypter" class="com.jcatalog.ocisetest.security.IbmOciRequestEncrypter">
+    <bean name="ibmOciRequestEncryptor" class="com.opuscapita.ocisetest.security.IbmOciRequestEncrypter">
         <property name="standardParams">
             <list>
                 <value>FUNCTION</value>

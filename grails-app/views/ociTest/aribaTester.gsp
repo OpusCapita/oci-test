@@ -11,7 +11,7 @@
 
 <body>
 
-<g:form action="handleTesterAction" method="POST">
+<g:form controller="ociTest" action="handleTester" method="POST">
     <h3>Mimic an Ariba Punchout Setup Request</h3>
 
     URL to Test: <input type="text" name="urltotest" size="70"

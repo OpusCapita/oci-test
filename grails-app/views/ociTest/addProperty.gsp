@@ -10,11 +10,11 @@
 <head>
     <title>oci-test</title>
     <meta name="layout" content="main"/>
-    <r:require modules="frontUtils, jquery"/>
+    <r:external uri="/css/default.css"/>
 </head>
 
 <body>
-<g:form controller="action" action="addPropertyAction">
+<g:form controller="ociTest" action="addProperty">
     <fieldset>
         <legend>
             Input new property parameters
@@ -27,7 +27,7 @@
 
         <br/>
         <label>&nbsp;</label>
-        <input type="button" value="back" onClick="back()"/>
+        <input type="button" value="back" onClick="window.history.back();"/>
         <input type="submit" value="add property"/>
     </fieldset>
 </g:form>

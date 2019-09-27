@@ -1,4 +1,4 @@
-package com.jcatalog.ocisetest.properties
+package com.opuscapita.ocisetest.properties
 
 /**
  * Interface containing methods for Properties manipulation

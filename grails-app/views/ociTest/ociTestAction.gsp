@@ -16,7 +16,8 @@
 <body>
 <h5>${session.getAttribute('function')}</h5>
 
-<g:form id="ociForm" name="ociForm">
+<g:form onsubmit="actionSubmit === 'do' ? this.target = jQuery('#targetFrameInput').val() : this.target = '_self'"
+        id="ociForm" name="ociForm">
     <g:if test="${saveFlag}">
         <h6>Configuration was successfully saved</h6>
     </g:if>
@@ -52,21 +53,22 @@
                         </label>
                     </td>
                     <td>
-                        <g:textField name="${property.key}" style="width: 25em" value="${property.value}"/>
+                        <g:textField id="${property.key}Input" name="${property.key}" style="width: 25em"
+                                     value="${property.value}"/>
                     </td>
                     <g:if test="${property.key != 'secretKey' && property.key != 'validityInterval'}">
-                        <td><button value="delete"><g:link style="color: #111122" controller="action"
-                                                           action="deletePropertyAction"
+                        <td><button value="delete"><g:link style="color: #111122" controller="ociTest"
+                                                           action="deleteProperty"
                                                            params="[rowToRemove: property?.key]">delete</g:link></button>
                         </td>
                     </g:if>
                 </tr>
             </g:each>
         </table>
-        <g:actionSubmit value="do It" action="doIt"/>
-        <g:actionSubmit value="add property" action="addPropertyPage"/>
-        <g:actionSubmit value="save configuration" action="saveConfigurationAction"/>
-        <g:actionSubmit value="back" action="index"/>
+        <g:actionSubmit onclick="actionSubmit = 'do';" value="do It" action="doIt"/>
+        <g:actionSubmit onclick="actionSubmit = 'add';" value="add property" action="showAddProperty"/>
+        <g:actionSubmit onclick="actionSubmit = 'save';" value="save configuration" action="saveConfiguration"/>
+        <g:actionSubmit onclick="actionSubmit = 'index';" value="back" action="index"/>
     </fieldset>
 </g:form>
 <br/>

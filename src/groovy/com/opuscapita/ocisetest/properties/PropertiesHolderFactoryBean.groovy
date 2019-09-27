@@ -1,4 +1,4 @@
-package com.jcatalog.ocisetest.properties
+package com.opuscapita.ocisetest.properties
 
 import grails.util.Holders
 import org.springframework.beans.factory.FactoryBean

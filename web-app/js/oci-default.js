@@ -2,18 +2,7 @@ var OCI_ENCRYPTED_COOKIE_NAME = "oci-encrypted";
 var IE7_MODE_COOKIE_NAME = "ie7-mode";
 var ENABLE_SCROLL_COOKIE_NAME = "enable-scroll";
 
-function back() {
-    window.history.back()
-}
-
-function openInWindowWithoutScroll() {
-    window.open(window.location.href, 'testWindow',
-        "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,width=1300,height=900");
-}
-
 function changeEncryptionVisibility() {
-    // var validityIntervalBlock = document.getElementById('validityInterval');
-    // var secretKeyBlock = document.getElementById('secretKey');
     var validityIntervalBlock = jQuery('#validityInterval')[0];
     var secretKeyBlock = jQuery('#secretKey')[0];
     if (getCookie(OCI_ENCRYPTED_COOKIE_NAME) === 'true' && validityIntervalBlock !== undefined) {
