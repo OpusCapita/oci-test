@@ -10,7 +10,6 @@
 <head>
     <title>oci-test</title>
     <meta name="layout" content="main"/>
-    <r:external uri="/css/default.css"/>
 </head>
 
 <body>

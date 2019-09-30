@@ -12,6 +12,10 @@ class OciTestController {
     def propertiesHolderFactory
     def ociRequestEncryptor
 
+    def beforeInterceptor = {
+        params.remove("_action_${actionName}".toString())
+    }
+
     def index() {
         def actions = applicationContext.getBean('propertiesHolderFactory') as Map
         [actions: actions.keySet()]
@@ -42,11 +46,6 @@ class OciTestController {
         Map ociRequestParams = params?.useEncryption == 'on' ?
                 ociRequestEncryptor.encrypt(params) :
                 params
-        /*
-        '_action_ + ${method_name}! do not change string below w/o renaming method and vice versa
-        For some reason there is an incorrect behavior with this parameter in form; necessarily to remove it from params
-         */
-        ociRequestParams.remove('_action_doIt')
         [ociRequestParams: ociRequestParams]
     }
 
