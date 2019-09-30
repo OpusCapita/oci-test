@@ -19,7 +19,9 @@
 <r:script>
     window.onload = function () {
         document.forms['ociSubmit'].submit();
-        window.close();
+        if (window.name !== 'testWindow') {
+            window.close();
+        }
     };
 </r:script>
 <form target="${params.targetFrame}" name="ociSubmit" action="${params.catalog_url}" method="post">
