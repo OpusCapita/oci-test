@@ -2,7 +2,7 @@ package com.opuscapita.ocisetest.security
 
 import com.opuscapita.ocisetest.properties.Encryptor
 
-class IbmOciRequestEncrypter implements OciRequestEncrypter {
+class DefaultOciRequestEncryptor implements OciRequestEncryptor {
     private static final String PASSWORD_PARAM = "password"
     private static final String VALIDITY_INTERVAL_PARAM = "validityInterval"
     private static final String SECRET_KEY_PARAM = "secretKey"

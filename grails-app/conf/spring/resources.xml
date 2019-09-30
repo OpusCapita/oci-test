@@ -5,7 +5,7 @@
 
     <bean name="propertiesHolderFactory" class="com.opuscapita.ocisetest.properties.PropertiesHolderFactoryBean"/>
 
-    <bean name="ibmOciRequestEncryptor" class="com.opuscapita.ocisetest.security.IbmOciRequestEncrypter">
+    <bean name="ociRequestEncryptor" class="com.opuscapita.ocisetest.security.DefaultOciRequestEncryptor">
         <property name="standardParams">
             <list>
                 <value>FUNCTION</value>

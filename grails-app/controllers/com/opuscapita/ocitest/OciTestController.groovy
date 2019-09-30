@@ -3,12 +3,12 @@ package com.opuscapita.ocitest
 import com.opuscapita.ocisetest.properties.PropertiesHolder
 import com.opuscapita.ocisetest.properties.PropertyUtils
 import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod
+import org.apache.commons.httpclient.methods.InputStreamRequestEntity
 import org.apache.commons.httpclient.methods.PostMethod
 
 class OciTestController {
     def propertiesHolderFactory
-    def ibmOciRequestEncryptor
+    def ociRequestEncryptor
 
     def index() {
         def actions = applicationContext.getBean('propertiesHolderFactory') as Map
@@ -38,7 +38,7 @@ class OciTestController {
 
     def doIt() {
         Map ociRequestParams = params?.useEncryption == 'on' ?
-                ibmOciRequestEncryptor.encrypt(params) :
+                ociRequestEncryptor.encrypt(params) :
                 params
         /*
         '_action_ + ${method_name}! do not change string below w/o renaming method and vice versa
@@ -77,18 +77,23 @@ class OciTestController {
         String urltotest = request.getParameter("urltotest")
 
         PostMethod post = new PostMethod(urltotest)
-        post.setRequestBody(new ByteArrayInputStream(cxmltosend.getBytes()))
-
-        cxmltosend.length() < Integer.MAX_VALUE ?
-                post.setRequestContentLength(cxmltosend.length()) :
-                post.setRequestContentLength(EntityEnclosingMethod.CONTENT_LENGTH_CHUNKED)
-
+        post.setRequestEntity(new InputStreamRequestEntity(new ByteArrayInputStream(cxmltosend.getBytes())))
+        cxmltosend.length() < Integer.MAX_VALUE ? post.setContentChunked(false) : post.setContentChunked(true)
         post.setRequestHeader("Content-type", "text/xml; charset=ISO-8859-1")
         HttpClient httpclient = new HttpClient()
-        int result = httpclient.executeMethod(post)
-        String strXML = post.getResponseBodyAsString()
-        post.releaseConnection()
-        render(text: strXML, contentType: "text/xml", encoding: "UTF-8")
+        int responseCode = 0
+        try {
+            responseCode = httpclient.executeMethod(post)
+            String strXML = post.getResponseBodyAsString()
+            render(text: strXML, contentType: "text/xml", encoding: "UTF-8")
+        } catch (e) {
+            (responseCode in 403..404 || e.getClass() == UnknownHostException) ?
+                    render(text: 'Please check URL you have entered.') :
+                    render(text: 'Something went wrong, please try again later.')
+            e.printStackTrace()
+        } finally {
+            post.releaseConnection()
+        }
     }
 
     def showAddProperty() {

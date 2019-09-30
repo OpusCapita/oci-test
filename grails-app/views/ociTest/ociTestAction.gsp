@@ -16,8 +16,7 @@
 <body>
 <h5>${session.getAttribute('function')}</h5>
 
-<g:form onsubmit="actionSubmit === 'do' ? this.target = jQuery('#targetFrameInput').val() : this.target = '_self'"
-        id="ociForm" name="ociForm">
+<g:form id="ociForm" name="ociForm">
     <g:if test="${saveFlag}">
         <h6>Configuration was successfully saved</h6>
     </g:if>
@@ -65,12 +64,17 @@
                 </tr>
             </g:each>
         </table>
-        <g:actionSubmit onclick="actionSubmit = 'do';" value="do It" action="doIt"/>
-        <g:actionSubmit onclick="actionSubmit = 'add';" value="add property" action="showAddProperty"/>
-        <g:actionSubmit onclick="actionSubmit = 'save';" value="save configuration" action="saveConfiguration"/>
-        <g:actionSubmit onclick="actionSubmit = 'index';" value="back" action="index"/>
+        <g:actionSubmit onclick="setTargetFrame(jQuery('#targetFrameInput').val());" value="do It" action="doIt"/>
+        <g:actionSubmit onclick="setTargetFrame();" value="add property" action="showAddProperty"/>
+        <g:actionSubmit onclick="setTargetFrame();" value="save configuration" action="saveConfiguration"/>
+        <g:actionSubmit onclick="setTargetFrame();" value="back" action="index"/>
     </fieldset>
 </g:form>
 <br/>
+<script>
+    function setTargetFrame(frame) {
+        jQuery('#ociForm').attr('target', frame != null ? frame : '_self');
+    }
+</script>
 </body>
 </html>

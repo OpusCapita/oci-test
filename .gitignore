@@ -1,2 +1,5 @@
 .idea
 target
+.slcache
+oci-test-grailsPlugins.iml
+oci-test.iml

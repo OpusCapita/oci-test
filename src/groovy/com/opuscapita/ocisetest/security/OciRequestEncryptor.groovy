@@ -3,7 +3,7 @@ package com.opuscapita.ocisetest.security
 /**
  * Encrypts OCI request parameters.
  */
-interface OciRequestEncrypter {
+interface OciRequestEncryptor {
     /**
      * Encrypts OCI request parameters.
      *
