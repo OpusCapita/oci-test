@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: logich
-  Date: 9/20/2019
-  Time: 6:26 PM
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>

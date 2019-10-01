@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: logich
-  Date: 9/24/2019
-  Time: 1:37 PM
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>PunchoutSetupRequest Test Tool</title></head>

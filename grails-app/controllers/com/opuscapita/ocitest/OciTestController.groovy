@@ -1,6 +1,6 @@
 package com.opuscapita.ocitest
 
-import com.opuscapita.ocisetest.properties.InboundComparator
+import com.opuscapita.ocisetest.comparator.InboundComparator
 import com.opuscapita.ocisetest.properties.PropertiesHolder
 import com.opuscapita.ocisetest.properties.PropertyUtils
 import org.apache.commons.httpclient.HttpClient

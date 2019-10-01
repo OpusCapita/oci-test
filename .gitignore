@@ -3,3 +3,7 @@ target
 .slcache
 oci-test-grailsPlugins.iml
 oci-test.iml
+/*.iml
+/*.ipr
+/*.iws
+**/.slcache

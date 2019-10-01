@@ -1,21 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: logich
-  Date: 9/30/2019
-  Time: 2:06 PM
---%>
+<%@ page import="com.opuscapita.ocisetest.security.Encryptor; org.apache.commons.codec.binary.Base64" contentType="text/html;charset=UTF-8" %>
 
-<%@ page import="javax.servlet.jsp.PageContext; com.opuscapita.ocisetest.properties.Encryptor" contentType="text/html;charset=UTF-8" %>
-<%
-    String secretKey = request.getAttribute("secretKey") as String
-    if (secretKey != null) {
-        Encryptor encryptor = new Encryptor(secretKey)
-        pageContext.setAttribute("encryptor", encryptor)
-    }
-%>
+<g:set var="encryptor" value="${request.getAttribute('secretKey') != null ?
+        new Encryptor(request.getAttribute("secretKey") as String) : null}"/>
 <html>
 <head>
-    <title><% request.getCharacterEncoding() %></title>
+    <title>${request.getCharacterEncoding()}</title>
 </head>
 
 <body>
@@ -34,17 +23,10 @@
                     <td>
                         <g:each in="${parameter.value}" var="parameterValue">
                             <g:if test="${encryptor != null && 'TIMESTAMP' == parameter.key}">
-                                <%
-                                    new Date(Long.parseLong(((Encryptor) pageContext.getAttribute("encryptor")).decrypt(pageContext.getAttribute("parameterValue") as String)))
-                                %>
+                                ${new Date(Long.parseLong(encryptor.decrypt(parameterValue as String)))}
                             </g:if>
                             <g:elseif test="${'~xmlDocument' == parameter.key}">
-                                <%
-                                    String encodedXml = pageContext.getAttribute("parameterValue") as String
-                                    String returnXML = new String(Base64.Decoder.decode(encodedXml.getBytes("UTF-8")))
-                                    pageContext.setAttribute("returnXML", returnXML)
-                                %>
-                                ${returnXML}
+                                ${new String(Base64.Decoder.decode((parameterValue as String).getBytes('UTF-8')))}
                             </g:elseif>
                             <g:else>
                                 ${parameterValue}
