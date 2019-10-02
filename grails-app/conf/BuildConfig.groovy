@@ -39,8 +39,12 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        // plugins for the build system only
-        build ":tomcat:7.0.55"
+        build('com.jcatalog.grailsplugins:build-process:7.18.GA.7',
+              ':tomcat:7.0.55') {
+            excludes "release", 'servlet-api'
+            export = false
+        }
+            
         build 'org.grails.plugins:release:3.0.1'
 
         // plugins needed at runtime but not for compilation
