@@ -99,7 +99,7 @@ class OciTestController {
 
     def inbound() {
         //parsing secret key from HOOK_URL (TEST functionality only)
-        String secretKey = StringUtils.substringAfterLast(request.getRequestURI(), "inbound/")
+        String secretKey = StringUtils.substringAfterLast(request.forwardURI, 'inbound/')
 
         if (StringUtils.isNotBlank(secretKey)) {
             log.info("Secret key: '" + secretKey + "'")

@@ -7,6 +7,8 @@ grails.project.target.level = 1.8
 grails.project.source.level = 1.8
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
+grails.project.groupId = "com.opuscapita.ocitest"
+
 grails.project.fork = [
         // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
         //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -39,8 +41,12 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        // plugins for the build system only
-        build ":tomcat:7.0.55"
+        build('com.jcatalog.grailsplugins:build-process:7.18.GA.7',
+              ':tomcat:7.0.55') {
+            excludes "release", 'servlet-api'
+            export = false
+        }
+            
         build 'org.grails.plugins:release:3.0.1'
 
         // plugins needed at runtime but not for compilation
