@@ -5,7 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.8
 grails.project.source.level = 1.8
-grails.project.groupId = "com.jcatalog.ocitest"
+grails.project.groupId = "com.opuscapita.ocitest"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
