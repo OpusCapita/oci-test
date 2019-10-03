@@ -6,7 +6,6 @@ import com.opuscapita.ocisetest.properties.PropertyUtils
 import org.apache.commons.httpclient.HttpClient
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity
 import org.apache.commons.httpclient.methods.PostMethod
-import org.apache.commons.lang.StringUtils
 
 class OciTestController {
     def propertiesHolderFactory
@@ -98,23 +97,15 @@ class OciTestController {
     }
 
     def inbound() {
-        //parsing secret key from HOOK_URL (TEST functionality only)
-        String secretKey = StringUtils.substringAfterLast(request.forwardURI, 'inbound/')
-
-        if (StringUtils.isNotBlank(secretKey)) {
-            log.info("Secret key: '" + secretKey + "'")
-            request.setAttribute("secretKey", secretKey)
-        }
-
+        String secretKey = params?.id
         Map<String, String[]> inboundParameters = [:]
         SortedSet<String> keys = new TreeSet<String>(InboundComparator.comparator)
         keys.addAll(params.keySet())
         for (String key : keys) {
             inboundParameters.put(key, request.getParameterMap().get(key) as String[])
         }
-        request.setAttribute("inboundParametersMap", inboundParameters)
 
-        [inboundParametersMap: inboundParameters]
+        [inboundParametersMap: inboundParameters, secretKey: secretKey]
     }
 
     def showAddProperty() {

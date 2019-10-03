@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<oc:ociSet var="encryptor" value="${request.getAttribute('secretKey')}"/>
+<oc:ociSet var="encryptor" value="${secretKey}"/>
 <html>
 <head>
 </head>
