@@ -1,3 +1,5 @@
+System.setProperty "javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl"
+
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -37,7 +39,8 @@ grails.project.dependency.resolution = {
 
     dependencies {
         compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
-
+        // https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE
+        compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.8.0-14'
     }
 
     plugins {
