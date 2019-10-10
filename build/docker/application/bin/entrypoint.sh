@@ -46,7 +46,7 @@ ls -la "$CATALINA_HOME/webapps"
 for cfg_file_path in $APP_ROOT/WEB-INF/conf/opc/default/*
 do
   cat << EOF > $APP_ROOT/WEB-INF/conf/opc/user/$(basename $cfg_file_path)
-HOOK_URL=${PUBLIC_URL}/inbound
+HOOK_URL=${PUBLIC_URL}/ociTest/inbound
 catalog_url=${CATALOG_URL}
 EOF
 done
