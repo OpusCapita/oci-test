@@ -8,10 +8,6 @@ refresh-dependencies: ## Install dependencies
 maven-deploy: refresh-dependencies ## Build and deploy Maven artifacts
 	./build/grails/maven-deploy.sh
 
-.PHONY: cleanup-cache
-cleanup-cache: # Remove SNAPSHOT plugins
-	./build/grails/cleanup-cache.sh
-
 .PHONY: docker-auth
 docker-auth: ## Login to Dockerhub
 	./build/docker/docker-auth.sh

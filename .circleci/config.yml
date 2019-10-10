@@ -57,11 +57,10 @@ jobs:
       - restore_cache: *restore_cache
       - run: make refresh-dependencies
       - run: make maven-deploy
+      - save_cache: *save_cache
       - setup_remote_docker
       - run: make build-docker
       - run: make publish-docker
-      - run: make cleanup-cache
-      - save_cache: *save_cache
 
 workflows:
   version: 2
