@@ -23,8 +23,6 @@ github_project=$($script_dir/../../get-github-repo-owner-slash-name.sh)
 revision=$( git rev-parse --verify HEAD )
 
 docker build \
-  --build-arg VAULT_ADDR="$VAULT_ADDR" \
-  --build-arg VAULT_TOKEN="$VAULT_TOKEN" \
   --build-arg WAR_PATH="./target/${app_name}-${app_version}.war" \
   --build-arg NAME="$app_name" \
   --build-arg VERSION="$app_version" \

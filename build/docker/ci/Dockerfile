@@ -1,13 +1,12 @@
 FROM opuscapita/minsk-core-maven:3.3.9
 
 # maintainer
-LABEL maintainer="Alexey.Sergeev@opuscapita.com"
+LABEL maintainer="egor.stambakio@opuscapita.com"
 
 # installing
 # - sdkman (https://sdkman.io/)
 # And via sdkman installing
 # - groovy
-# - maven
 # - grails
 ENV SDKMAN_DIR /usr/local/sdkman
 RUN curl -s https://get.sdkman.io | bash && \
@@ -21,6 +20,9 @@ RUN curl -s https://get.sdkman.io | bash && \
 
 # add groovy, grails to PATH
 ENV PATH $SDKMAN_DIR/candidates/groovy/current/bin:$SDKMAN_DIR/candidates/grails/current/bin:$PATH
+
+# copy config files
+COPY --from=opuscapita/minsk-core-ci:1 /root/.grails/settings.groovy /root/.grails/
 
 # install docker according to https://docs.docker.com/install/linux/docker-ce/debian/
 RUN apt-get update && \
@@ -38,36 +40,10 @@ RUN apt-get update && \
     apt-cache policy docker-ce && \
     apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# copy config files
-COPY --from=opuscapita/minsk-core-ci:1 /root/.grails/settings.groovy /root/.grails/
-
 # install vault
 RUN curl -fsSLk -o /tmp/vault.zip https://releases.hashicorp.com/vault/1.2.2/vault_1.2.2_linux_amd64.zip \
   && unzip /tmp/vault.zip -d /usr/local/bin/ \
   && rm -f /tmp/vault.zip
-
-# install az
-
-# get rid of warnings about missing terminal etc.
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update && apt-get install ca-certificates curl apt-transport-https lsb-release gnupg \
-  && curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null \
-  && AZ_REPO=$(lsb_release -cs) && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
-    sudo tee /etc/apt/sources.list.d/azure-cli.list \
-  && apt-get update && apt-get install azure-cli
-
-# install Kubectl
-ARG KUBECTL_VERSION=1.15.3
-RUN curl -fLk -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
-  && chmod +x /usr/bin/kubectl
-
-# Install Helm
-ARG HELM_VERSION=2.12.2
-RUN curl -fLk -o /usr/bin/helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
-  && cd /usr/bin && tar -xzf ./helm.tar.gz --strip-components=1 -C . linux-amd64/helm \
-  && chmod +x /usr/bin/helm \
-  && rm -rf /usr/bin/helm.tar.gz
 
 # Add 'properties' (https://github.com/OpusCapita/properties) binary file into '/usr/local/bin/'
 RUN curl -sL https://git.io/oc-properties | PROPERTIES_TARGET_DIR=/usr/local/bin bash
