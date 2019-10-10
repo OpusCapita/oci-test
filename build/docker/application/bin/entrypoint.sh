@@ -12,6 +12,12 @@ while [ $# -gt 0 ]; do
     --context-path=*)             # required
       CONTEXT_PATH="${1#*=}"
       ;;
+    --catalog-url=*)             # required, example: http://test.jcatalog.com/dev-proc/opc/oci/index
+      CATALOG_URL="${1#*=}"
+      ;;
+    --public-url=*)             # required, example: http://test.jcatalog.com/dev-proc/oci-test
+      PUBLIC_URL="${1#*=}"
+      ;;
     --java-opts=*)               # optional - additional Java options
       EXTRA_JAVA_OPTS="${1#*=}"
       ;;
@@ -24,7 +30,7 @@ done
 
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-. $SCRIPT_DIR/assert-vars.sh CONTEXT_PATH
+. $SCRIPT_DIR/assert-vars.sh CONTEXT_PATH CATALOG_URL PUBLIC_URL
 
 # link app to context path
 # Make /a/b/c -> a#b#c
@@ -34,6 +40,18 @@ ln -s "$APP_ROOT" "$CATALINA_HOME/webapps/$ESCAPED_CONTEXT_PATH"
 
 printf "\nwebapps:\n"
 ls -la "$CATALINA_HOME/webapps"
+
+# prepare configuration
+
+for cfg_file_path in $APP_ROOT/web-app/WEB-INF/conf/opc/default/*
+do
+  cat << EOF > $APP_ROOT/web-app/WEB-INF/conf/opc/user/$(basename $cfg_file_path)
+HOOK_URL=${PUBLIC_URL}/inbound
+catalog_url=${CATALOG_URL}
+EOF
+done
+
+ls -l $APP_ROOT/web-app/WEB-INF/conf/opc/user
 
 #####################################################################
 #
