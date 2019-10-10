@@ -43,15 +43,15 @@ ls -la "$CATALINA_HOME/webapps"
 
 # prepare configuration
 
-for cfg_file_path in $APP_ROOT/web-app/WEB-INF/conf/opc/default/*
+for cfg_file_path in $APP_ROOT/WEB-INF/conf/opc/default/*
 do
-  cat << EOF > $APP_ROOT/web-app/WEB-INF/conf/opc/user/$(basename $cfg_file_path)
+  cat << EOF > $APP_ROOT/WEB-INF/conf/opc/user/$(basename $cfg_file_path)
 HOOK_URL=${PUBLIC_URL}/inbound
 catalog_url=${CATALOG_URL}
 EOF
 done
 
-ls -l $APP_ROOT/web-app/WEB-INF/conf/opc/user
+ls -l $APP_ROOT/WEB-INF/conf/opc/user
 
 #####################################################################
 #
