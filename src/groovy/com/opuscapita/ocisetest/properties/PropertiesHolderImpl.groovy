@@ -1,5 +1,7 @@
 package com.opuscapita.ocisetest.properties
 
+import org.apache.commons.io.IOUtils
+
 /**
  * Implementation of PropertiesHolder
  */
@@ -11,9 +13,30 @@ class PropertiesHolderImpl implements PropertiesHolder {
     @Override
     void loadProperties() throws Exception {
         properties = new Properties()
-        userPropertiesFilePath.exists() ?
-                properties.load(new FileInputStream(userPropertiesFilePath)) :
-                properties.load(new FileInputStream(defaultPropertiesFilePath))
+
+        def is
+
+        // load default properties
+        try {
+            is = new FileInputStream(defaultPropertiesFilePath)
+        } finally {
+            if (is) {
+                IOUtils.closeQuietly(is)
+            }
+            is = null
+        }
+
+        if (userPropertiesFilePath.exists()) {
+            // load user properties (override default)
+            try {
+                is = new FileInputStream(userPropertiesFilePath)
+            } finally {
+                if (is) {
+                    IOUtils.closeQuietly(is)
+                }
+                is = null
+            }
+        }
     }
 
     @Override
