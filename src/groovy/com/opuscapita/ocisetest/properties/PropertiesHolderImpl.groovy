@@ -19,6 +19,7 @@ class PropertiesHolderImpl implements PropertiesHolder {
         // load default properties
         try {
             is = new FileInputStream(defaultPropertiesFilePath)
+            properties.load(is)
         } finally {
             if (is) {
                 IOUtils.closeQuietly(is)
@@ -30,6 +31,7 @@ class PropertiesHolderImpl implements PropertiesHolder {
             // load user properties (override default)
             try {
                 is = new FileInputStream(userPropertiesFilePath)
+                properties.load(is)
             } finally {
                 if (is) {
                     IOUtils.closeQuietly(is)
