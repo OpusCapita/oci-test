@@ -1,61 +1,85 @@
 version: 2.1
 
-defaults: &defaults
+orbs:
+  git: opuscapita/git@volatile
+
+aliases:
+  - &restore_cache
+    keys:
+      - v1-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+      - v1-{{ .Branch }}
+      - v1
+
+  - &save_cache
+    key: v1-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+    paths:
+      - ~/.m2/repository
+
+setup_docker: &setup_docker
   docker:
-    - image: opuscapita/minsk-core-ci:1
+    - image: opuscapita/oci-test:ci
+      environment:
+        JAVA_OPTS: -Xms2g -Xmx2g
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASS
   working_directory: ~/build
 
-aliases:
-  - &restore-cache-grails
-    keys:
-      - v1-oci-test-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
-      - v1-oci-test-{{ .Branch }}
-      - v1-oci-test
-  - &save-cache-grails
-    key: v1-oci-test-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
-    paths:
-      - ~/.m2/repository
-
 jobs:
-  inject-environment:
+  init:
     docker:
-      - image: opuscapita/minsk-core-machineuser-env:1
+      - image: opuscapita/minsk-core-machineuser-env:2
     steps:
-      - run: circle_ci_add_env.sh \
-          DOCKER_USER DOCKER_PASS \
-          MAVEN_REPO JFROG_USER JFROG_PASSWD \
-          CIRCLE_CI_TOKEN
-  build:
-    <<: *defaults
+      - run: circle_ci_add_env.sh
+
+  build-docker-ci:
+    docker:
+    - image: docker
     steps:
+      - run: apk add --no-cache bash make git openssh
       - checkout
-      - restore_cache: *restore-cache-grails
+      - run: wget -O /vault.zip https://releases.hashicorp.com/vault/1.2.2/vault_1.2.2_linux_amd64.zip; unzip /vault.zip -d /usr/bin/
+      - setup_remote_docker
       - run:
-          name: Refresh dependencies
-          command: grails refresh-dependencies --non-interactive
-      - run:
-          name: Build and deploy artifact
-          command: grails maven-deploy -Dgrails.env=prod -verbose
-      - save_cache: *save-cache-grails
+          name: Check if image build is required
+          command: |
+            make docker-auth
+            if [ -z "$(git show --name-only | grep build/docker/ci)" ]; then
+              DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect opuscapita/oci-test:ci && \
+                circleci step halt || echo "Image doesn't exist, proceed"
+            fi
+      - run: make build-docker-ci && make publish-docker-ci
+
+  build:
+    <<: *setup_docker
+    steps:
+      - git/checkout-with-submodules
+      - restore_cache: *restore_cache
+      - run: make refresh-dependencies
+      - run: make maven-deploy
+      - save_cache: *save_cache
+      - setup_remote_docker
+      - run: make build-docker
+      - run: make publish-docker
 
 workflows:
   version: 2
-  build:
+  commit:
     jobs:
-      - inject-environment:
+      - init:
           filters:
             tags:
               only: /.*/
-            branches:
+      - build-docker-ci:
+          filters:
+            tags:
               only: /.*/
-      - build:
           requires:
-            - inject-environment
+            - init
+      - build:
           filters:
             tags:
               only: /.*/
-            branches:
-              only: /.*/
+          requires:
+            - init
+            - build-docker-ci
