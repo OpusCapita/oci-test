@@ -22,4 +22,4 @@ ENV PORT 3333
 
 EXPOSE ${PORT}
 
-CMD ["npm","start"]
+ENTRYPOINT ["npm","start","--"]
