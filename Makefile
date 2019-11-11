@@ -2,11 +2,11 @@
 
 .PHONY: refresh-dependencies
 refresh-dependencies: ## Install dependencies
-	./build/grails/refresh-dependencies.sh
+	npm i
 
-.PHONY: maven-deploy
-maven-deploy: refresh-dependencies ## Build and deploy Maven artifacts
-	./build/grails/maven-deploy.sh
+.PHONY: test
+test: ## Run tests
+	npm test
 
 .PHONY: docker-auth
 docker-auth: ## Login to Dockerhub

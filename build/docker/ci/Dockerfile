@@ -1,28 +1,25 @@
-FROM opuscapita/minsk-core-maven:3.3.9
+FROM opuscapita/minsk-core-debian-stretch-slim-utils:1
 
 # maintainer
 LABEL maintainer="egor.stambakio@opuscapita.com"
 
-# installing
-# - sdkman (https://sdkman.io/)
-# And via sdkman installing
-# - groovy
-# - grails
-ENV SDKMAN_DIR /usr/local/sdkman
-RUN curl -s https://get.sdkman.io | bash && \
-    set -x && \
-    echo "sdkman_auto_answer=true" > $SDKMAN_DIR/etc/config && \
-    echo "sdkman_auto_selfupdate=false" >> $SDKMAN_DIR/etc/config && \
-    echo "sdkman_insecure_ssl=false" >> $SDKMAN_DIR/etc/config && \
-    /bin/bash -c "source $SDKMAN_DIR/bin/sdkman-init.sh && \
-       sdk install groovy 2.4.13 && \
-       sdk install grails 2.4.4"
+# Installing
+# - nvm (https://github.com/creationix/nvm)
+# - node
+ENV NVM_DIR /usr/local/nvm
+ENV NVM_VERSION 0.35.1
+ENV NODE_VERSION 12.13.0
 
-# add groovy, grails to PATH
-ENV PATH $SDKMAN_DIR/candidates/groovy/current/bin:$SDKMAN_DIR/candidates/grails/current/bin:$PATH
+RUN mkdir -p $NVM_DIR && \
+    curl https://raw.githubusercontent.com/creationix/nvm/v$NVM_VERSION/install.sh | bash && \
+    /bin/bash -c "source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default"
 
-# copy config files
-COPY --from=opuscapita/minsk-core-ci:1 /root/.grails/settings.groovy /root/.grails/
+# Set up our PATH correctly so we don't have to long-reference npm, node, &c.
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # install docker according to https://docs.docker.com/install/linux/docker-ce/debian/
 RUN apt-get update && \
@@ -44,6 +41,3 @@ RUN apt-get update && \
 RUN curl -fsSLk -o /tmp/vault.zip https://releases.hashicorp.com/vault/1.2.2/vault_1.2.2_linux_amd64.zip \
   && unzip /tmp/vault.zip -d /usr/local/bin/ \
   && rm -f /tmp/vault.zip
-
-# Add 'properties' (https://github.com/OpusCapita/properties) binary file into '/usr/local/bin/'
-RUN curl -sL https://git.io/oc-properties | PROPERTIES_TARGET_DIR=/usr/local/bin bash

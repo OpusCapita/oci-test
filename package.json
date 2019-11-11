@@ -1,0 +1,26 @@
+{
+  "name": "test-util",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --watch src --watch package.json --ignore src/config.json  src/server.js",
+    "test": "jest",
+    "start": "node src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.19.0",
+    "express": "4.17.1",
+    "properties-reader": "0.3.1",
+    "pug": "2.0.4",
+    "yargs": "14.2.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "5.11.2",
+    "cheerio": "1.0.0-rc.3",
+    "jest": "24.9.0",
+    "nodemon": "1.19.4"
+  }
+}

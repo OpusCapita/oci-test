@@ -6,20 +6,18 @@ orbs:
 aliases:
   - &restore_cache
     keys:
-      - v1-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+      - v1-{{ .Branch }}-{{ checksum "package.json" }}
       - v1-{{ .Branch }}
       - v1
 
   - &save_cache
-    key: v1-{{ .Branch }}-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+    key: v1-{{ .Branch }}-{{ checksum "package.json" }}
     paths:
-      - ~/.m2/repository
+      - node_modules
 
 setup_docker: &setup_docker
   docker:
     - image: opuscapita/oci-test:ci
-      environment:
-        JAVA_OPTS: -Xms2g -Xmx2g
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASS
@@ -56,7 +54,7 @@ jobs:
       - git/checkout-with-submodules
       - restore_cache: *restore_cache
       - run: make refresh-dependencies
-      - run: make maven-deploy
+      - run: make test
       - save_cache: *save_cache
       - setup_remote_docker
       - run: make build-docker

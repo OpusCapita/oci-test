@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+  background-color: #d7e3eb;
+  color: #274f7d;
+}
+
+a{
+  color: #274f7d;
+}
+
+.container {
+  box-shadow: 0 0 10px lightslategrey;
+  min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.list {
+  list-style-type: none;
+  margin: 24px;
+}
+
+.forms-list {
+  border-bottom: lightslategrey 1px solid;
+  padding-bottom: 12px;
+}
+
+.list-item {
+  margin: 12px;
+}
+
+.input-value {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.func-buttons {
+  margin-left: 24px;
+  padding-left: 40px;
+  margin-bottom: 40px;
+}
+
+.m-left {
+  margin-left: 36px;
+}
+
+.func-button {
+  background:#4471a4;
+  color: white;
+}
+
+.do-it-button {
+ background: #409654;
+ color: white;
+}
+
+.remove-button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-name {
+  display: flex;
+  margin: 24px;
+  border-bottom: lightslategrey solid 1px;
+}
+
+.links-list {
+  list-style-type: none;
+}
+
+.message {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  background-color: white ;
+  border-radius: 12px;
+  border: #274f7d solid 1px;
+}
+
+.input-group-prepend.col-2 {
+  display: block;
+  padding: 0;
+}
+
+textarea {
+  width: 100%;
+}
