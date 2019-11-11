@@ -2,6 +2,7 @@ const express = require('express');
 const createFormManger = require('./formManager.js');
 const path = require('path');
 const axios = require('axios');
+const morgan = require('morgan');
 const encryptAll = require('./encryptor.js');
 
 const app = express();
@@ -26,6 +27,8 @@ app.set('view engine', 'pug');
 
 app.use(express.json());
 app.use(express.urlencoded());
+
+app.use(morgan('combined'));
 
 app.get('/', async (req, res, next) => {
   try {
