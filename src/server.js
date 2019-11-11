@@ -127,7 +127,7 @@ app.listen(port, host, async () => {
       BASE_HOOK_URL: base_hook_url
     });
     console.log(`${new Date()}`);
-    console.log('Start listening on port: ', port);
+    console.log(`Start listening on ${host}:${port}`);
   } catch (e) {
     console.log('!!!ERROR!!!');
     console.log(e.message);
