@@ -16,7 +16,7 @@ describe('index.html', () => {
     const $ = cheerio.load(renderFormPage({ formsNames }));
     Array.from($('li > button > a')).forEach((a, index) => {
       expect(a.firstChild.data).toBe(formsNames[index]);
-      expect(a.attribs.href).toBe(`/form?name=${formsNames[index]}`);
+      expect(a.attribs.href).toBe(`./form?name=${formsNames[index]}`);
     })
   });
 })
