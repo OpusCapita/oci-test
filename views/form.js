@@ -62,7 +62,7 @@ const createMessage = (message) => {
 };
 
 const saveForm = (name, fields) => {
-  fetch(`/form?name=${name}`, {
+  fetch(`./form?name=${name}`, {
     method: 'POST',
     body: JSON.stringify(fields),
     headers: { 'Content-Type': 'application/json' },
@@ -91,7 +91,7 @@ const showEncryption = () => {
 };
 
 const encrypt = (fields) => {
-  return fetch('/encrypt', {
+  return fetch('./encrypt', {
     method: 'POST',
     body: JSON.stringify(fields),
     headers: { 'Content-Type': 'application/json' },

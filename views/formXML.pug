@@ -14,10 +14,10 @@ html
   body
     div(class="container bg-white p-0")
       nav(class="navbar navbar-light bg-light" )
-        a(class="navbar-brand" href="/") OCI-Test
+        a(class="navbar-brand" href="./") OCI-Test
       div(class="form-name")
         h3(id="name") #{name}
-      form(method="POST" action="/sendxml")
+      form(method="POST" action="./sendxml")
         ul(class="list")
           li(class="list-item")
             div(class="row input-group mb-3")
@@ -31,5 +31,3 @@ html
           li(class="list-item") #{secondHint}
           li(class="list-item")
             textarea(class="m-auto" name="xmltosend" rows="50") #{xml}
-      script
-        include formXML.js

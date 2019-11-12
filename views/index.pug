@@ -9,14 +9,14 @@ html
   body
     div(class="container bg-white p-0")
       nav(class="navbar navbar-light bg-light" )
-        a(class="navbar-brand" href="/") OCI-Test
+        a(class="navbar-brand" href="./") OCI-Test
       ul(class="list forms-list m-small")
         each name in formsNames
           li(class="list-item")
             button(class="btn btn-light" type="button")
-              a(href=`/form?name=${name}`) #{name}
+              a(href=`./form?name=${name}`) #{name}
       ul(class="links-list")
         li(class="list-item")
-          a(href="/aribaTester") Ariba Tester
+          a(href="./aribaTester") Ariba Tester
         li(class="list-item")
-          a(href="/otpTester") Oracle Transparent Punchout Tester
+          a(href="./otpTester") Oracle Transparent Punchout Tester
