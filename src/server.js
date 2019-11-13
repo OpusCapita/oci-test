@@ -19,7 +19,7 @@ const SECRET_KEY_PARAM = "secretKey";
 const noEncryptFields = ['~CALLER', '~OkCode', 'FUNCTION', 'HOOK_URL', 'OCI_VERSION', '~TARGET'];
 
 const { base_hook_url, base_catalog_url } = require('yargs').
-  option('base_hook_url', { default: `http://${host}:${port}/hook` }).
+  option('base_hook_url', { default: 'https://demo.eproc.dev.opuscapita.com/eproc-line-deployment/eproc-review-tests/oci-test/hook' }).
   option('base_catalog_url', { default: 'https://demo.eproc.dev.opuscapita.com/eproc-line-deployment/eproc-review-tests' }).
   argv;
 
@@ -42,7 +42,6 @@ app.get('/', async (req, res, next) => {
 app.get('/form', async (req, res, next) => {
   try {
     const result = await formManager.getForm(configPath, req.query.name);
-    result.fields.find(f => f.id === 'HOOK_URL').value = base_hook_url;
     res.render('form', result);
   }
   catch (e) {

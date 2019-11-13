@@ -12,15 +12,16 @@ const useEncryption = document.getElementById('useEncryption');
 const useIE7mode = document.getElementById('useIE7mode');
 const enableScrollbar = document.getElementById('enableScrollbar');
 const form = document.forms[0];
+const errorMessage = 'Unexpected error';
 
 const getFieldInner = (fieldName) => `
-  <div class="row input-group mb-3">
-   <div class="col-2 input-group-prepend p-0">
+  <div class="row input-group input-group-sm mb-2">
+   <div class="col-2 input-group-prepend">
      <span class="input-group-text w-100">${fieldName}</span>
    </div>
-   <input name=${fieldName} class="form-control input-value" type="text">
+   <input name="${fieldName}" class="form-control input-value" type="text">
    <div class="input-group-append">
-    <button type="button" class="btn btn-danger remove-button">X</button>
+    <button type="button" class="btn btn-sm btn-danger remove-button">X</button>
    </div>
   </div>
 `;
@@ -68,8 +69,8 @@ const saveForm = (name, fields) => {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => {
-      console.log(res.ok ? 'Form has been saved' : res.statusText);
-      createMessage(res.ok ? 'Form has been saved' : res.statusText);
+      console.log(res.ok ? 'Form has been saved' : errorMessage);
+      createMessage(res.ok ? 'Form has been saved' : errorMessage);
     })
 }
 
@@ -100,7 +101,7 @@ const encrypt = (fields) => {
       if (res.ok) {
         return res.json()
       }
-      createMessage(res.statusText);
+      createMessage(errorMessage);
     });
 };
 
@@ -157,15 +158,61 @@ enableScrollbar.addEventListener('click', () => {
   storeChecked();
 })
 
+const setInputInvalidMode = (input) => {
+  input.className = 'form-control input-value invalid-input';
+}
+
+const setInputDefaultMode = (input) => {
+  input.className = 'form-control input-value';
+}
+
+const showInputError = (input, message) => {
+  setInputInvalidMode(input);
+  createMessage(message);
+  const onChange = (e) => {
+    setInputDefaultMode(input);
+    input.removeEventListener('change', onChange);
+  }
+  input.addEventListener('change', onChange);
+}
+
+const validateEncryptionMode = () => {
+  try {
+    if (secretKey.value.length === 0) {
+      showInputError(secretKey, 'secretKey cannot be empty string');
+      return false;
+    }
+    if (secretKey.value.length !== 8) {
+      showInputError(secretKey, 'secretKey must be 8 characters');
+      return false;
+    }
+    if (validityInterval.value.length === 0) {
+      showInputError(validityInterval, 'validityInterval cannot be empty string')
+      return false;
+    }
+    if (!Number.isInteger(+validityInterval.value)) {
+      showInputError(validityInterval, 'validityInterval must be a nubmer')
+      return false;
+    }
+  } catch (e) {
+    console.log(e);
+    createMessage('Unexpected error')
+    return false;
+  }
+  return true;
+}
+
 form.addEventListener('submit', (e) => {
   if (e.target.useEncryption.checked) {
-    encrypt(getFields().concat(getCheckboxs()))
-      .then(res => {
-        res.forEach(({ id, value }) => {
-          form[id].value = value;
+    if (validateEncryptionMode()) {
+      encrypt(getFields().concat(getCheckboxs()))
+        .then(res => {
+          res.forEach(({ id, value }) => {
+            form[id].value = value;
+          });
+          form.submit();
         });
-        form.submit();
-      });
+    }
     e.preventDefault();
   }
 });

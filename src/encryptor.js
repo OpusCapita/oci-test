@@ -8,7 +8,7 @@ const encryptAll = (fields, secretKey, noEncryptNames) => {
   const validityInterval = Number(fields.find(({ id }) => id === VALIDITY_INTERVAL_PARAM).value);
   const result = fields.map(({ id, value }) => {
     if (id.toUpperCase() === HOOK_URL_PARAM) {
-      return { id, value: `${value}/${secretKey}` };
+      return { id, value: `${value}?secretKey=${secretKey}` };
     }
     if (noEncryptNames.includes(id)) {
       return { id, value };
