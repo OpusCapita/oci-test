@@ -8,6 +8,10 @@ refresh-dependencies: ## Install dependencies
 test: ## Run tests
 	npm test
 
+.PHONY: mvn-deploy
+mvn-deploy: ## Deploy to maven repository
+	mvn depoloy
+
 .PHONY: docker-auth
 docker-auth: ## Login to Dockerhub
 	./build/docker/docker-auth.sh

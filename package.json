@@ -2,11 +2,11 @@
   "name": "oci-test",
   "version": "1.0.0",
   "description": "OCI-test application",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon --watch src --watch package.json --ignore src/config.json  src/server.js",
-    "test": "jest",
-    "start": "node src/server.js"
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --watch package.json --ignore src/config.json  src/server.js",
+    "test": "cross-env NODE_ENV=test jest",
+    "start": "cross-env NODE_ENV=production node src/server"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,8 @@
     "morgan": "1.9.1",
     "properties-reader": "0.3.1",
     "pug": "2.0.4",
-    "yargs": "14.2.0"
+    "yargs": "14.2.0",
+    "cross-env": "5.2.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.11.2",

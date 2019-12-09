@@ -18,10 +18,10 @@ const aribaTestName = 'Mimic an Ariba Punchout Setup Request';
 const SECRET_KEY_PARAM = "secretKey";
 const noEncryptFields = ['~CALLER', '~OkCode', 'FUNCTION', 'HOOK_URL', 'OCI_VERSION', '~TARGET'];
 
-const { base_hook_url, base_catalog_url } = require('yargs').
-  option('base_hook_url', { default: 'https://demo.eproc.dev.opuscapita.com/eproc-line-deployment/eproc-review-tests/oci-test/hook' }).
-  option('base_catalog_url', { default: 'https://demo.eproc.dev.opuscapita.com/eproc-line-deployment/eproc-review-tests' }).
-  argv;
+const {
+  public_opc_url,
+  public_oci_test_url,
+} = require("../config");
 
 app.set('view engine', 'pug');
 
@@ -90,7 +90,7 @@ app.get('/aribaTester', async (req, res, next) => {
     toRender.secondHint = `After clicking submit view source.
      You will see cxml response there.
     Notice the cXML is not inside a FORM variable if send by Ariba Buyer/ACSN.`;
-    toRender.urltotest = base_catalog_url + '/opc/ariba/setup';
+    toRender.urltotest = `${public_opc_url}/ariba/setup`;
     res.render('formXML', toRender);
   } catch (e) {
     next(e);
@@ -101,7 +101,7 @@ app.get('/otpTester', async (req, res, next) => {
   try {
     const toRender = await formManager.getFormXML(otpTestPath, otpTestName);
     toRender.secondHint = 'After clicking submit view source. You will see xml response there.';
-    toRender.urltotest = base_catalog_url + '/opc/oracleTransparentPunchout/search'
+    toRender.urltotest = `${public_opc_url}/oracleTransparentPunchout/search`;
     res.render('formXML', toRender);
   } catch (e) {
     next(e);
@@ -125,11 +125,11 @@ app.post('/sendxml', async (req, res, next) => {
 app.listen(port, host, async () => {
   try {
     await formManager.setSetupConfigs(starterConfigPath, configPath, {
-      BASE_CATALOG_URL: base_catalog_url,
-      BASE_HOOK_URL: base_hook_url
+      BASE_CATALOG_URL: public_opc_url,
+      BASE_HOOK_URL: `${public_oci_test_url}/hook`
     });
     console.log(`${new Date()}`);
-    console.log(`Start listening on ${host}:${port}`);
+    console.log(`Start listening on http://${host}:${port}`);
   } catch (e) {
     console.log('!!!ERROR!!!');
     console.log(e.message);

@@ -14,6 +14,7 @@ aliases:
     key: v1-{{ .Branch }}-{{ checksum "package.json" }}
     paths:
       - node_modules
+      - ~/.m2/repository
 
 setup_docker: &setup_docker
   docker:
@@ -55,6 +56,13 @@ jobs:
       - restore_cache: *restore_cache
       - run: make refresh-dependencies
       - run: make test
+      - run: make mvn-deploy
+      - run:
+          name: Cleanup local repository before saving its content into cache
+          command: |
+            export PROJECT_GROUP_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.groupId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
+            rm -rfv "~/.m2/repository/${PROJECT_GROUP_ID//.//}"
+            du -sh ~/.m2/repository
       - save_cache: *save_cache
       - setup_remote_docker
       - run: make build-docker

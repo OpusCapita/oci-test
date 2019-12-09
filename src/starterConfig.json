@@ -13,7 +13,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -78,7 +78,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -143,7 +143,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -208,7 +208,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -325,7 +325,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -438,7 +438,7 @@
       "fields": [
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "FUNCTION",
@@ -471,7 +471,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",
@@ -540,7 +540,7 @@
         },
         {
           "id": "catalog_url",
-          "value": "BASE_CATALOG_URL/opc/oci/index"
+          "value": "BASE_CATALOG_URL/oci/index"
         },
         {
           "id": "targetFrame",

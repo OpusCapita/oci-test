@@ -13,6 +13,7 @@ LABEL maintainer="egor.stambakio@opuscapita.com" \
 WORKDIR /app
 
 COPY / ./
+RUN mv ./build/docker/application/bin/entrypoint.sh /usr/local/bin/
 RUN npm install --production
 
 RUN rm -rf .git* build .circleci
@@ -22,4 +23,4 @@ ENV PORT 3333
 
 EXPOSE ${PORT}
 
-ENTRYPOINT ["npm","start","--"]
+ENTRYPOINT ["entrypoin.sh"]

@@ -7,6 +7,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ignore idea files
+.idea
+*.iml
+
 # Runtime data
 pids
 *.pid
@@ -33,6 +37,8 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+
+target
 
 # Dependency directories
 node_modules/
@@ -61,3 +67,7 @@ typings/
 
 # next.js build output
 .next
+
+# ignore local configs
+config.json
+src/config.json
