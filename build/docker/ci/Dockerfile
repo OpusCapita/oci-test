@@ -1,4 +1,4 @@
-FROM opuscapita/minsk-core-debian-stretch-slim-utils:1
+FROM opuscapita/minsk-core-maven:3.3.9
 
 # maintainer
 LABEL maintainer="egor.stambakio@opuscapita.com"
