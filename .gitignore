@@ -69,5 +69,6 @@ typings/
 .next
 
 # ignore local configs
+build/server
 config.json
-src/config.json
+src/server/config.json

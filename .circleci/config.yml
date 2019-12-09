@@ -56,6 +56,7 @@ jobs:
       - restore_cache: *restore_cache
       - run: make refresh-dependencies
       - run: make test
+      - run: make build
       - run: make mvn-deploy
       - run:
           name: Cleanup local repository before saving its content into cache

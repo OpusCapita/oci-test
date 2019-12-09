@@ -12,7 +12,7 @@ const aribaTestPath = path.join(__dirname, 'aribaRequest.xml');
 const otpTestPath = path.join(__dirname, 'otpRequest.xml');
 const formManager = createFormManger();
 const port = process.env.PORT || 3000;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '127.0.0.1';
 const otpTestName = 'Mimic an Oracle Transparent Punchout Search Request';
 const aribaTestName = 'Mimic an Ariba Punchout Setup Request';
 const SECRET_KEY_PARAM = "secretKey";
@@ -21,7 +21,7 @@ const noEncryptFields = ['~CALLER', '~OkCode', 'FUNCTION', 'HOOK_URL', 'OCI_VERS
 const {
   public_opc_url,
   public_oci_test_url,
-} = require("../config");
+} = require("../../config");
 
 app.set('view engine', 'pug');
 

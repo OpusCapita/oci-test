@@ -8,6 +8,10 @@ refresh-dependencies: ## Install dependencies
 test: ## Run tests
 	npm test
 
+.PHONY: build
+build: ## Run build
+	npm run build
+
 .PHONY: mvn-deploy
 mvn-deploy: ## Deploy to maven repository
 	mvn deploy
