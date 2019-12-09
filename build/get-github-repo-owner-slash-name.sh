@@ -10,7 +10,7 @@ if [[ $github_project_url == git@github.com:* ]] ; then
 elif [[ $github_project_url == https://github.com/* ]] ; then
   url_without_prefix=${github_project_url#"https://github.com/"}
 else
-  ehco "'$github_project_url' is not recognised as GitHub repo URL"
+  echo "'$github_project_url' is not recognised as GitHub repo URL"
   exit 1
 fi
 
