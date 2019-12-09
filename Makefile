@@ -10,7 +10,7 @@ test: ## Run tests
 
 .PHONY: mvn-deploy
 mvn-deploy: ## Deploy to maven repository
-	mvn depoloy
+	mvn deploy
 
 .PHONY: docker-auth
 docker-auth: ## Login to Dockerhub
