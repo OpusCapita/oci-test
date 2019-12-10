@@ -88,6 +88,10 @@ a{
   border: #bd2130 solid 1px;
 }
 
+.main-color {
+  color:#274f7d;
+}
+
 textarea {
   width: 100%;
 }

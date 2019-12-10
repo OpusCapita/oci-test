@@ -13,8 +13,8 @@ html
       ul(class="list forms-list m-small")
         each name in formsNames
           li(class="list-item")
-            button(class="btn btn-light" type="button")
-              a(href=`./form?name=${name}`) #{name}
+            a(href=`./form?name=${name}`)
+              button(class="btn btn-light main-color" type="button") #{name}
       ul(class="links-list")
         li(class="list-item")
           a(href="./aribaTester") Ariba Tester
