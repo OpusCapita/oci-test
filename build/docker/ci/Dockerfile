@@ -28,7 +28,6 @@ COPY --from=opuscapita/minsk-core-ci:1 /root/.grails/settings.groovy /root/.grai
 RUN apt-get update && \
     apt-get install -y \
       unzip \
-      rsync \
       apt-transport-https \
       ca-certificates \
       curl \
