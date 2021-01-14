@@ -4,7 +4,7 @@
   "description": "OCI-test application",
   "main": "src/server.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --watch src --watch package.json --ignore src/config.json  src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --watch package.json --ignore src/server/config.json  src/server",
     "test": "cross-env NODE_ENV=test jest",
     "start": "cross-env NODE_ENV=development node src/server",
     "start-prod": "cross-env NODE_ENV=production node build/server",
