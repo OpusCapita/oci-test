@@ -33,7 +33,7 @@ app.use(morgan('combined'));
 app.get('/', async (req, res, next) => {
   try {
     const result = await formManager.getFormsNames(configPath);
-    res.render('index', { formsNames: result || [], });
+    res.render('index', { formsNames: result || [], public_oci_test_url });
   } catch (e) {
     next(e);
   }
