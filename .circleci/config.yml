@@ -16,14 +16,6 @@ aliases:
       - node_modules
       - ~/.m2/repository
 
-setup_docker: &setup_docker
-  docker:
-    - image: opuscapita/minsk-core-ci:2
-      auth:
-        username: $DOCKER_USER
-        password: $DOCKER_PASS
-  working_directory: ~/build
-
 jobs:
   init:
     docker:
@@ -32,7 +24,12 @@ jobs:
       - run: circle_ci_add_env.sh
 
   build:
-    <<: *setup_docker
+    docker:
+      - image: opuscapita/minsk-core-ci:2
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
+    working_directory: ~/build
     steps:
       - git/checkout-with-submodules
       - restore_cache: *restore_cache

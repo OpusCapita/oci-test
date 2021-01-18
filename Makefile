@@ -14,7 +14,7 @@ build: ## Run build
 
 .PHONY: mvn-deploy
 mvn-deploy: ## Deploy to maven repository
-	mvn deploy
+	configure-maven.sh && mvn deploy
 
 .PHONY: docker-auth
 docker-auth: ## Login to Dockerhub
