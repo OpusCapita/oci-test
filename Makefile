@@ -20,14 +20,6 @@ mvn-deploy: ## Deploy to maven repository
 docker-auth: ## Login to Dockerhub
 	./build/docker/docker-auth.sh
 
-.PHONY: build-docker-ci
-build-docker-ci: docker-auth ## Build CI Docker image
-	./build/docker/ci/build.sh
-
-.PHONY: publish-docker-ci
-publish-docker-ci: docker-auth ## Publish CI Docker image
-	./build/docker/ci/push.sh
-
 .PHONY: build-docker
 build-docker: docker-auth ## Build application Docker image
 	./build/docker/application/build.sh

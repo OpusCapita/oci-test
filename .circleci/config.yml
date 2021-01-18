@@ -18,7 +18,7 @@ aliases:
 
 setup_docker: &setup_docker
   docker:
-    - image: opuscapita/${CIRCLE_PROJECT_REPONAME}:ci
+    - image: opuscapita/minsk-core-ci:2
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASS
@@ -30,24 +30,6 @@ jobs:
       - image: opuscapita/minsk-core-machineuser-env:2
     steps:
       - run: circle_ci_add_env.sh
-
-  build-docker-ci:
-    docker:
-    - image: docker
-    steps:
-      - run: apk add --no-cache bash make git openssh
-      - checkout
-      - run: wget -O /vault.zip https://releases.hashicorp.com/vault/1.2.2/vault_1.2.2_linux_amd64.zip; unzip /vault.zip -d /usr/bin/
-      - setup_remote_docker
-      - run:
-          name: Check if image build is required
-          command: |
-            make docker-auth
-            if [ -z "$(git show --name-only | grep build/docker/ci)" ]; then
-              DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect opuscapita/${CIRCLE_PROJECT_REPONAME}:ci && \
-                circleci step halt || echo "Image doesn't exist, proceed"
-            fi
-      - run: make build-docker-ci && make publish-docker-ci
 
   build:
     <<: *setup_docker
@@ -77,16 +59,9 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - build-docker-ci:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - init
       - build:
           filters:
             tags:
               only: /.*/
           requires:
             - init
-            - build-docker-ci
