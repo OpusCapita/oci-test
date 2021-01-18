@@ -18,7 +18,7 @@ aliases:
 
 setup_docker: &setup_docker
   docker:
-    - image: opuscapita/oci-test:ci
+    - image: opuscapita/${CIRCLE_PROJECT_REPONAME}:ci
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASS
@@ -44,7 +44,7 @@ jobs:
           command: |
             make docker-auth
             if [ -z "$(git show --name-only | grep build/docker/ci)" ]; then
-              DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect opuscapita/oci-test:ci && \
+              DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect opuscapita/${CIRCLE_PROJECT_REPONAME}:ci && \
                 circleci step halt || echo "Image doesn't exist, proceed"
             fi
       - run: make build-docker-ci && make publish-docker-ci

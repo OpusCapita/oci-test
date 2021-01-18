@@ -1,4 +1,4 @@
-FROM opuscapita/minsk-core-maven:3.3.9
+FROM opuscapita/minsk-core-ci:2
 
 # maintainer
 LABEL maintainer="egor.stambakio@opuscapita.com"
