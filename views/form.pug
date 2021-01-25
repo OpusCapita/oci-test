@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+html
+  head
+    title #{name}
+    meta(charset="utf-8")
+    link(
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    )
+    style
+      include index.css
+  body
+    div(class="container bg-white p-0")
+      nav(class="navbar navbar-light bg-light")
+        a(class="navbar-brand" href="./") OCI-Test
+      div(class="form-name")
+        h3(id="name") #{name}
+      form(method="POST")
+
+        div(class="func-buttons d-flex justify-content-between mb-4")
+          div
+            button(type="button" class="add btn func-button ml-3 pr-4 pl-4") Add field
+            button(type="button" class="save btn func-button ml-3 pr-4 pl-4") Save configuration
+            button(type="button" class="back btn func-button ml-3 pr-4 pl-4") Go back
+          div(class="mr-5")
+            button(type="submit" class="do btn do-it-button ml-3 pr-4 pl-4") Do it
+
+        div(class="form-check ml-5 mb-2")
+          input(class="form-check-input" type="checkbox" id="useEncryption" name="useEncryption")
+          label(class="form-check-label" for="useEncryption") Send values encrypted/encoded
+        div(class="form-check ml-5 mb-2")
+          input(class="form-check-input" type="checkbox" id="useIE7mode" name="useIE7mode")
+          label(class="form-check-label" for="useIE7mode") Set IE7 compatibility mode
+        div(class="form-check ml-5 mb-2")
+          input(class="form-check-input" type="checkbox" id="enableScrollbar" name="enableScrollbar")
+          label(class="form-check-label" for="enableScrollbar") Enable scroll in OPC
+
+        ul(class="list" id="fields-list")
+          each field in fields
+            li
+              div(class="row input-group input-group-sm mb-2")
+                div(class="col-2 input-group-prepend")
+                  span(class="input-group-text w-100") #{field.id}
+                input(type="text" name=field.id class="form-control input-value" value=field.value)
+                div(class="input-groupd-append")
+                  button(type="button" class="btn btn-sm btn-danger remove-button") X
+
+        div(class="func-buttons d-flex justify-content-between")
+          div
+            button(type="button" class="add btn func-button ml-3 pr-4 pl-4") Add field
+            button(type="button" class="save btn func-button ml-3 pr-4 pl-4") Save configuration
+            button(type="button" class="back btn func-button ml-3 pr-4 pl-4") Go back
+          div(class="mr-5")
+            button(type="submit" class="do btn do-it-button ml-3 pr-4 pl-4") Do it
+    script
+      include form.js
