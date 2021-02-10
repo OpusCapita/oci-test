@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.opuscapita.node</groupId>
   <artifactId>oci-test</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-EPROC-20051-SNAPSHOT</version>
   <name>oci-test</name>
   <description>OCI Test</description>
   <properties>

@@ -4,6 +4,7 @@ const path = require('path');
 const axios = require('axios');
 const morgan = require('morgan');
 const encryptAll = require('./encryptor.js');
+const https = require('https');
 
 const app = express();
 const configPath = path.join(__dirname, 'config.json');
@@ -113,7 +114,9 @@ app.post('/sendxml', async (req, res, next) => {
     const result = await axios.post(
       req.body.urltotest,
       req.body.xmltosend,
-      { headers: { 'Content-type': 'text/xml; charset=ISO-8859-1' } }
+      { headers: { 'Content-type': 'text/xml; charset=ISO-8859-1' } , httpsAgent: new https.Agent({
+          rejectUnauthorized: false
+        }) }
     );
     res.contentType("text/xml");
     res.send(result.data);
